@@ -2,11 +2,33 @@
 <html>
 
 <head>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="core.js"></script>
+    <script src="cont-static.js"></script>
 </head>
 
 <body>
-    hello, world!
+    <h1>Scalr</h1>
+    <div id="input">
+        <h2>Input</h2>
+        <form id="inpform">
+            <select id="note">
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+                <option>D</option>
+                <option>E</option>
+                <option>F</option>
+                <option>G</option>
+            </select>
+            <input id="generate" type="submit">
+        </form>
+    </div>
+    <div id="output">
+        <h2>Output</h2>
+        <ul id="scale_output"></ul>
+    </div>
 </body>
 
 </html>

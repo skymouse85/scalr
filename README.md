@@ -29,7 +29,7 @@ input fields
 ...
 
 result object:
-- scale nameß
+- scale name
 - list of notes included in scale
 
 
