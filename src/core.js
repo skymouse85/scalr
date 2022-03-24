@@ -14,7 +14,12 @@ function brain(input) {
 }
 
 
-
+// function to take noteVal and return scale
+function handleNoteVal(inp) {
+    if (inp === 'A') {
+        return scaleConstruct(Amaj);
+    }
+};
 
 
 function scaleConstruct(sclObjArr) {
