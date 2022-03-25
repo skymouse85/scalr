@@ -3,8 +3,9 @@ window.Scalr = {};
 ////  handle ABCDEFG major scales ✔️✔️✔️
 ////use if else to return majors given input ✔️✔️✔️
 ////make a major scale container object that can be called on for correct return ✔️✔️✔️
-
+// ♮♯♭
 var majors = {
+    //natural majors
     'A♮': [
         { letter: 'A', flavor: 'natural' },
         { letter: 'B', flavor: 'natural' },
@@ -74,6 +75,27 @@ var majors = {
         { letter: 'E', flavor: 'natural' },
         { letter: 'F', flavor: 'sharp' },
         { letter: 'G', flavor: 'natural' },
+    ],
+    //sharp majors
+    'F♯': [
+        { letter: 'F', flavor: 'sharp' },
+        { letter: 'G', flavor: 'sharp' },
+        { letter: 'A', flavor: 'sharp' },
+        { letter: 'B', flavor: 'natural' },
+        { letter: 'C', flavor: 'sharp' },
+        { letter: 'D', flavor: 'sharp' },
+        { letter: 'E', flavor: 'sharp' },
+        { letter: 'F', flavor: 'sharp' },
+    ],
+    'C♯': [
+        { letter: 'C', flavor: 'sharp' },
+        { letter: 'D', flavor: 'sharp' },
+        { letter: 'E', flavor: 'sharp' },
+        { letter: 'F', flavor: 'sharp' },
+        { letter: 'G', flavor: 'sharp' },
+        { letter: 'A', flavor: 'sharp' },
+        { letter: 'B', flavor: 'sharp' },
+        { letter: 'C', flavor: 'sharp' },
     ]
 }
 Scalr.getScale = function (inp) {
