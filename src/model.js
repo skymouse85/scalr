@@ -5,7 +5,7 @@ window.Scalr = {};
 ////make a major scale container object that can be called on for correct return ✔️✔️✔️
 
 var majors = {
-    'A': [
+    'A♮': [
         { letter: 'A', flavor: 'natural' },
         { letter: 'B', flavor: 'natural' },
         { letter: 'C', flavor: 'sharp' },
@@ -15,7 +15,7 @@ var majors = {
         { letter: 'G', flavor: 'sharp' },
         { letter: 'A', flavor: 'natural' },
     ],
-    'B': [
+    'B♮': [
         { letter: 'B', flavor: 'natural' },
         { letter: 'C', flavor: 'sharp' },
         { letter: 'D', flavor: 'sharp' },
@@ -25,7 +25,7 @@ var majors = {
         { letter: 'A', flavor: 'sharp' },
         { letter: 'B', flavor: 'natural' },
     ],
-    'C': [
+    'C♮': [
         { letter: 'C', flavor: 'natural' },
         { letter: 'D', flavor: 'natural' },
         { letter: 'E', flavor: 'natural' },
@@ -35,7 +35,7 @@ var majors = {
         { letter: 'B', flavor: 'natural' },
         { letter: 'C', flavor: 'natural' },
     ],
-    'D': [
+    'D♮': [
         { letter: 'D', flavor: 'natural' },
         { letter: 'E', flavor: 'natural' },
         { letter: 'F', flavor: 'sharp' },
@@ -45,7 +45,7 @@ var majors = {
         { letter: 'C', flavor: 'sharp' },
         { letter: 'D', flavor: 'natural' },
     ],
-    'E': [
+    'E♮': [
         { letter: 'E', flavor: 'natural' },
         { letter: 'F', flavor: 'sharp' },
         { letter: 'G', flavor: 'sharp' },
@@ -55,7 +55,7 @@ var majors = {
         { letter: 'D', flavor: 'sharp' },
         { letter: 'E', flavor: 'natural' },
     ],
-    'F': [
+    'F♮': [
         { letter: 'F', flavor: 'natural' },
         { letter: 'G', flavor: 'natural' },
         { letter: 'A', flavor: 'natural' },
@@ -65,7 +65,7 @@ var majors = {
         { letter: 'E', flavor: 'natural' },
         { letter: 'F', flavor: 'natural' },
     ],
-    'G': [
+    'G♮': [
         { letter: 'G', flavor: 'natural' },
         { letter: 'A', flavor: 'natural' },
         { letter: 'B', flavor: 'natural' },
