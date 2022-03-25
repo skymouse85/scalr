@@ -9,8 +9,8 @@ function onReady() {
         event.preventDefault(); //prevents from submitting and reloading page
 
         var noteVal = $("#note").val()
-
-        var scale = Scalr.getScale(noteVal)
+        var noteFlavor = $("#flavor").val()
+        var scale = Scalr.getScale(noteVal + noteFlavor)
         console.log(scale)
 
         writeScale(scale);
@@ -24,7 +24,6 @@ function onReady() {
         for (let i = 0; i < scale.length; i++) {
             // for each note in scale...
             var text = "";
-
             var note = scale[i];
             text += note.letter;
             text += ' '
