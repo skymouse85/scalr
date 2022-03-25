@@ -31,10 +31,10 @@ input fields
     - tenor
     - alto
  - instrument transposition
-  - C
-  - F
-  - Bb
-  - Eb
+    - C
+    - F
+    - Bb
+    - Eb
 ...
 
 result object:
