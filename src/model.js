@@ -4,7 +4,16 @@ window.Scalr = {};
 ////use if else to return majors given input ✔️✔️✔️
 ////make a major scale container object that can be called on for correct return ✔️✔️✔️
 // ♮♯♭
-var majors = {
+Scalr.getScale = function (noteVal, noteFlavor, quality) {
+    var noteName = noteVal + noteFlavor;
+    console.log(typeof (noteName));
+    console.log(quality);
+    console.log(quality[noteName]);
+
+    return quality[noteName];
+
+}
+var major = {
     //natural majors
     'A♮': [
         { letter: 'A', flavor: 'natural' },
@@ -160,7 +169,7 @@ var majors = {
     ]
 }
 
-var minors = {
+var minor = {
     // circle of fifths sharp
     'A♮': [
         { letter: 'A', flavor: 'natural' },
@@ -295,12 +304,11 @@ var minors = {
     ]
 
 }
+console.log(minor["B♭"])
 
-Scalr.getScale = function (inp) {
 
-    return majors[inp];
 
-}
+
 
 
 //todo work on scale name output as part of scale object and Scaler.getScale based on tonality input
