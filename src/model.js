@@ -160,6 +160,142 @@ var majors = {
     ]
 }
 
+var minors = {
+    // circle of fifths sharp
+    'A♮': [
+        { letter: 'A', flavor: 'natural' },
+        { letter: 'B', flavor: 'natural' },
+        { letter: 'C', flavor: 'natural' },
+        { letter: 'D', flavor: 'natural' },
+        { letter: 'E', flavor: 'natural' },
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'A', flavor: 'natural' },
+    ],
+    'E♮': [
+        { letter: 'E', flavor: 'natural' },
+        { letter: 'F', flavor: 'sharp' },
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'A', flavor: 'natural' },
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'C', flavor: 'natural' },
+        { letter: 'D', flavor: 'natural' },
+        { letter: 'E', flavor: 'natural' },
+    ],
+    'B♮': [
+        { letter: 'B', flavor: 'natural' },
+        { letter: 'C', flavor: 'sharp' },
+        { letter: 'D', flavor: 'natural' },
+        { letter: 'E', flavor: 'natural' },
+        { letter: 'F', flavor: 'sharp' },
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'A', flavor: 'natural' },
+        { letter: 'B', flavor: 'natural' },
+    ],
+    'F♯': [
+        { letter: 'F', flavor: 'sharp' },
+        { letter: 'G', flavor: 'sharp' },
+        { letter: 'A', flavor: 'natural' },
+        { letter: 'B', flavor: 'natural' },
+        { letter: 'C', flavor: 'sharp' },
+        { letter: 'D', flavor: 'natural' },
+        { letter: 'E', flavor: 'natural' },
+        { letter: 'F', flavor: 'sharp' },
+    ],
+    'C♯': [
+        { letter: 'C', flavor: 'sharp' },
+        { letter: 'D', flavor: 'sharp' },
+        { letter: 'E', flavor: 'natural' },
+        { letter: 'F', flavor: 'sharp' },
+        { letter: 'G', flavor: 'sharp' },
+        { letter: 'A', flavor: 'natural' },
+        { letter: 'B', flavor: 'natural' },
+        { letter: 'C', flavor: 'sharp' },
+    ],
+    'G♯': [
+        { letter: 'G', flavor: 'sharp' },
+        { letter: 'A', flavor: 'sharp' },
+        { letter: 'B', flavor: 'natural' },
+        { letter: 'C', flavor: 'sharp' },
+        { letter: 'D', flavor: 'sharp' },
+        { letter: 'E', flavor: 'natural' },
+        { letter: 'F', flavor: 'sharp' },
+        { letter: 'G', flavor: 'sharp' },
+    ],
+    'D♯': [
+        { letter: 'D', flavor: 'sharp' },
+        { letter: 'E', flavor: 'sharp' },
+        { letter: 'F', flavor: 'sharp' },
+        { letter: 'G', flavor: 'sharp' },
+        { letter: 'A', flavor: 'sharp' },
+        { letter: 'B', flavor: 'natural' },
+        { letter: 'C', flavor: 'sharp' },
+        { letter: 'D', flavor: 'sharp' },
+    ],
+    //circle of fourths flats
+    'D♮': [
+        { letter: 'D', flavor: 'natural' },
+        { letter: 'E', flavor: 'natural' },
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'A', flavor: 'natural' },
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'natural' },
+        { letter: 'D', flavor: 'natural' },
+    ],
+    'G♮': [
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'A', flavor: 'natural' },
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'natural' },
+        { letter: 'D', flavor: 'natural' },
+        { letter: 'E', flavor: 'flat' },
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'natural' },
+    ],
+    'C♮': [
+        { letter: 'C', flavor: 'natural' },
+        { letter: 'D', flavor: 'natural' },
+        { letter: 'E', flavor: 'flat' },
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'A', flavor: 'flat' },
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'natural' },
+    ],
+    'F♮': [
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'A', flavor: 'flat' },
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'natural' },
+        { letter: 'D', flavor: 'flat' },
+        { letter: 'E', flavor: 'flat' },
+        { letter: 'F', flavor: 'natural' },
+    ],
+    'B♭': [
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'natural' },
+        { letter: 'D', flavor: 'flat' },
+        { letter: 'E', flavor: 'flat' },
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'flat' },
+        { letter: 'A', flavor: 'flat' },
+        { letter: 'B', flavor: 'flat' },
+    ],
+    'E♭': [
+        { letter: 'E', flavor: 'flat' },
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'flat' },
+        { letter: 'A', flavor: 'flat' },
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'flat' },
+        { letter: 'D', flavor: 'flat' },
+        { letter: 'E', flavor: 'flat' },
+    ]
+
+}
+
 Scalr.getScale = function (inp) {
 
     return majors[inp];
@@ -167,4 +303,4 @@ Scalr.getScale = function (inp) {
 }
 
 
-//todo work on scale name output as part of scale object and Scaler.getScale
+//todo work on scale name output as part of scale object and Scaler.getScale based on tonality input
