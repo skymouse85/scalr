@@ -26,11 +26,6 @@ function scaleConstruct(sclObjArr) {
     var result = "";
     for (let i = 0; i < sclObjArr.length; i++) {
         var noteObj = sclObjArr[i];
-        // for (var key in noteObj) {
-        //     result += noteObj.letter;
-        //     // result += noteObj.flavor;
-        //     result += ','
-        // }
         result += noteObj.letter;
         result += ' '
         result += noteObj.flavor;
