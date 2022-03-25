@@ -1,8 +1,8 @@
 window.Scalr = {};
 
-//todo handle ABCDEFG major scales ✔️✔️✔️
-//use if else to return majors given input ✔️✔️✔️
-//make a major scale container object that can be called on for correct return
+////  handle ABCDEFG major scales ✔️✔️✔️
+////use if else to return majors given input ✔️✔️✔️
+////make a major scale container object that can be called on for correct return ✔️✔️✔️
 
 var majors = {
     'A': [
