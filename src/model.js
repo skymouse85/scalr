@@ -158,9 +158,8 @@ var majors = {
         { letter: 'B', flavor: 'flat' },
         { letter: 'C', flavor: 'flat' },
     ]
-
-
 }
+
 Scalr.getScale = function (inp) {
 
     return majors[inp];
