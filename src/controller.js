@@ -33,7 +33,7 @@ function onReady() {
             } else if (note.flavor === 'flat') {
                 text += '♭'
             }
-            //todo work on basic text output for accidentals - if note.flavor  ===  flat {note.flavor = b} ect...
+            //// work on basic text output for accidentals - if note.flavor  ===  flat {note.flavor = b} ect...
 
             text += ' ';
             var $li = $('<li></li>') // li is a jquery object
