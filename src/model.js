@@ -96,7 +96,70 @@ var majors = {
         { letter: 'A', flavor: 'sharp' },
         { letter: 'B', flavor: 'sharp' },
         { letter: 'C', flavor: 'sharp' },
+    ],
+    //flat majors
+    'B♭': [
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'natural' },
+        { letter: 'D', flavor: 'natural' },
+        { letter: 'E', flavor: 'flat' },
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'A', flavor: 'natural' },
+        { letter: 'B', flavor: 'flat' },
+    ],
+    'E♭': [
+        { letter: 'E', flavor: 'flat' },
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'A', flavor: 'flat' },
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'natural' },
+        { letter: 'D', flavor: 'natural' },
+        { letter: 'E', flavor: 'flat' },
+    ],
+    'A♭': [
+        { letter: 'A', flavor: 'flat' },
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'natural' },
+        { letter: 'D', flavor: 'flat' },
+        { letter: 'E', flavor: 'flat' },
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'A', flavor: 'flat' },
+    ],
+    'D♭': [
+        { letter: 'D', flavor: 'flat' },
+        { letter: 'E', flavor: 'flat' },
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'natural' },
+        { letter: 'A', flavor: 'flat' },
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'natural' },
+        { letter: 'D', flavor: 'flat' },
+    ],
+    'G♭': [
+        { letter: 'G', flavor: 'flat' },
+        { letter: 'A', flavor: 'flat' },
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'flat' },
+        { letter: 'D', flavor: 'flat' },
+        { letter: 'E', flavor: 'flat' },
+        { letter: 'F', flavor: 'natural' },
+        { letter: 'G', flavor: 'flat' },
+    ],
+    'C♭': [
+        { letter: 'C', flavor: 'flat' },
+        { letter: 'D', flavor: 'flat' },
+        { letter: 'E', flavor: 'flat' },
+        { letter: 'F', flavor: 'flat' },
+        { letter: 'G', flavor: 'flat' },
+        { letter: 'A', flavor: 'flat' },
+        { letter: 'B', flavor: 'flat' },
+        { letter: 'C', flavor: 'flat' },
     ]
+
+
 }
 Scalr.getScale = function (inp) {
 
