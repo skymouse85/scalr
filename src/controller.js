@@ -10,7 +10,8 @@ function onReady() {
 
         var noteVal = $("#note").val()
         var noteFlavor = $("#flavor").val()
-        var scale = Scalr.getScale(noteVal + noteFlavor)
+        var quality = $("#quality").val()
+        var scale = Scalr.getScale(noteVal, noteFlavor, quality)
         console.log(scale)
 
         writeScale(scale);
