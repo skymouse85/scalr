@@ -28,7 +28,11 @@ function onReady() {
             var note = scale[i];
             text += note.letter;
             text += ' '
-            text += note.flavor;
+            if (note.flavor === 'sharp') {
+                text += '♯'
+            } else if (note.flavor === 'flat') {
+                text += '♭'
+            }
             //todo work on basic text output for accidentals - if note.flavor  ===  flat {note.flavor = b} ect...
 
             text += ' ';
