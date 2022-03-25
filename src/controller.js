@@ -29,7 +29,7 @@ function onReady() {
             text += note.letter;
             text += ' '
             text += note.flavor;
-            //todo work on basic text output for accidentals - if note.flavor  ===  flat {} ect...
+            //todo work on basic text output for accidentals - if note.flavor  ===  flat {note.flavor = b} ect...
 
             text += ' ';
             var $li = $('<li></li>') // li is a jquery object
