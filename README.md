@@ -25,7 +25,16 @@ input fields
      - 9, 11, 13
      - sharp, flat
 
-
+ - clefs - these will the output scales to a user's preferred clef
+    - treble
+    - bass
+    - tenor
+    - alto
+ - instrument transposition
+  - C
+  - F
+  - Bb
+  - Eb
 ...
 
 result object:
