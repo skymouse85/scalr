@@ -4,15 +4,7 @@ window.Scalr = {};
 ////use if else to return majors given input ✔️✔️✔️
 ////make a major scale container object that can be called on for correct return ✔️✔️✔️
 // ♮♯♭
-Scalr.getScale = function (noteVal, noteFlavor, quality) {
-    var noteName = noteVal + noteFlavor;
-    console.log(typeof (noteName));
-    console.log(quality);
-    console.log(quality[noteName]);
 
-    return quality[noteName];
-
-}
 var major = {
     //natural majors
     'A♮': [
@@ -304,11 +296,22 @@ var minor = {
     ]
 
 }
-console.log(minor["B♭"])
 
 
 
 
+Scalr.getScale = function (noteVal, noteFlavor, quality) {
+    var noteName = noteVal + noteFlavor;
+    if (quality === 'major') {
+        return major[noteName];
+    } else if (quality === 'minor') {
+        return minor[noteName];
+    }
 
+    // use if statement to popint to object from quality input
+    // return quality[noteName];
+}
 
 //todo work on scale name output as part of scale object and Scaler.getScale based on tonality input
+// new approach might be needed for returning different scales. 
+// vexflow front end notation librtary
