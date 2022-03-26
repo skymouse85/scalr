@@ -307,6 +307,25 @@ function harmonic(nattyMin) {
     return nattyMin;
 }
 
+//*descender
+// takes in a scale and returns that scale plus all notes in reverse starting at the leading tone
+//!not sure why this is not working
+function descender(scale) {
+    var full = []
+    for (let i = 0; i < scale.length; i++) {
+        full.push(scale[i]);
+    }
+    for (let j = 7; j > scale.length; j--) {
+        full.push(scale[j]);
+    }
+    return full;
+}
+console.log(descender(minor['B♭']));
+
+//*melodic minor generator
+// new array that adds the values starting from the end to the beginning of the array (may use a descending scale function in this case)
+// raise ascending 6th and 7th degrees in a simaler manner to harmonic 
+// descend natural (just interate backwards and push from the input scale)
 
 
 Scalr.getScale = function (noteVal, noteFlavor, quality) {
