@@ -297,6 +297,15 @@ var minor = {
 
 }
 
+//harmonic minor handler
+function harmonic(nattyMin) {
+    if (nattyMin[6].flavor === 'flat') {
+        nattyMin[6].flavor = 'natural'
+    } else if (nattyMin[6].flavor === 'natural') {
+        nattyMin[6].flavor = 'sharp'
+    };
+    return nattyMin;
+}
 
 
 
@@ -304,8 +313,10 @@ Scalr.getScale = function (noteVal, noteFlavor, quality) {
     var noteName = noteVal + noteFlavor;
     if (quality === 'major') {
         return major[noteName];
-    } else if (quality === 'minor') {
+    } else if (quality === 'natural minor') {
         return minor[noteName];
+    } else if (quality === 'harmonic minor') {
+        return harmonic(minor[noteName]);
     }
 
     // use if statement to popint to object from quality input
