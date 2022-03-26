@@ -10,7 +10,7 @@ function onReady() {
 
         var noteVal = $("#note").val()
         var noteFlavor = $("#flavor").val()
-        var quality = $("#quality").val()
+        var quality = $("#quality").val() // i believe this is the issue
         var scale = Scalr.getScale(noteVal, noteFlavor, quality)
         console.log(scale)
 
