@@ -7,6 +7,7 @@ function onReady() {
 
     function onSubmit(event) {
         event.preventDefault(); //prevents from submitting and reloading page
+        // need to clear on submit
 
         var noteVal = $("#note").val()
         var noteFlavor = $("#flavor").val()
