@@ -28,10 +28,11 @@ function onReady() {
     function writeScale(scale) {
         var $ul = $("#scale_output") // 
         $ul.empty();
-        for (let i = 0; i < scale.length; i++) {
+        var scaleCopy = copyScale(scale);
+        for (let i = 0; i < scaleCopy.length; i++) {
             // for each note in scale...
             var text = "";
-            var note = scale[i];
+            var note = scaleCopy[i];
             text += note.letter;
             text += ' '
             if (note.flavor === 'sharp') {
