@@ -18,7 +18,12 @@ function onReady() {
         writeScale(scale);
 
     }
-
+    function copyScale(scale) {
+        var scaleCopy = {
+            ...scale
+        };
+        return scaleCopy;
+    }
 
     function writeScale(scale) {
         var $ul = $("#scale_output") // 
