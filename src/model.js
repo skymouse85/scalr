@@ -1,14 +1,13 @@
 window.Scalr = {};
 
-////  handle ABCDEFG major scales ✔️✔️✔️
-////use if else to return majors given input ✔️✔️✔️
-////make a major scale container object that can be called on for correct return ✔️✔️✔️
 // ♮♯♭
 
 (function () {
     /**
      * these scale centers are based on the tonalities found in J.S. Bach's Well Tempered Clavier as well as the modern circle of fiths (https://en.wikipedia.org/wiki/Circle_of_fifths) Major scales are organized chromatically starting with C, and minors are organized chormatically starting with A (as Bach did in WTC), including relevant enharmonic equvalents.
      */
+
+    //* all chromatic majors and minors are accounted for as is 'correct'
     var major = {
         //natural majors
         'C♮': [
@@ -326,14 +325,11 @@ window.Scalr = {};
 
     function descender(scale) {
         scale = copyScale(scale);
-        var full = []
-        for (let i = 0; i < scale.length; i++) {
-            full.push(scale[i]);
+        var descend = []
+        for (let j = scale.length - 2; j > 0; j--) {
+            descend.push({ ...scale[j] });
         }
-        for (let j = 7; j > scale.length; j--) {
-            full.push(scale[j]);
-        }
-        return full;
+        return descend;
     }
     console.log(descender(minor['B♭']));
 
