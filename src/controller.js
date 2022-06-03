@@ -18,21 +18,15 @@ function onReady() {
         writeScale(scale);
 
     }
-    function copyScale(scale) {
-        var scaleCopy = {
-            ...scale
-        };
-        return scaleCopy;
-    }
+
 
     function writeScale(scale) {
         var $ul = $("#scale_output") // 
         $ul.empty();
-        var scaleCopy = copyScale(scale);
-        for (let i = 0; i < scaleCopy.length; i++) {
+        for (let i = 0; i < scale.length; i++) {
             // for each note in scale...
             var text = "";
-            var note = scaleCopy[i];
+            var note = scale[i];
             text += note.letter;
             text += ' '
             if (note.flavor === 'sharp') {
