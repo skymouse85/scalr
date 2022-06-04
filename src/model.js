@@ -326,17 +326,44 @@ window.Scalr = {};
     function descender(scale) {
         scale = copyScale(scale);
         var descend = []
-        for (let j = scale.length - 2; j > 0; j--) {
+        for (let j = scale.length - 2; j > -1; j--) {
             descend.push({ ...scale[j] });
         }
         return descend;
     }
-    console.log(descender(minor['B♭']));
+    // console.log(descender(minor['B♭']));
 
-    //*melodic minor generator
-    // new array that adds the values starting from the end to the beginning of the array (may use a descending scale function in this case)
-    // raise ascending 6th and 7th degrees in a simaler manner to harmonic 
-    // descend natural (just interate backwards and push from the input scale)
+    //*melodic minor handler
+    /**
+     * 
+     * @param {array} naturalMinorScale 
+     * @returns {array} copy of the scale that has the raised 6th and 7th degree ascending, and descends as a natural minor
+     */
+
+    function melodic(scale) {
+        // make full scale array
+        var fullScale = [];
+        //copy scale as ascend
+        var ascend = copyScale(scale);
+        // raise 6th and 7th scale degrees
+        if (ascend[5].flavor === 'flat') {
+            ascend[5].flavor = 'natural'
+        } else if (ascend[5].flavor === 'natural') {
+            ascend[5].flavor = 'sharp'
+        };
+        if (ascend[6].flavor === 'flat') {
+            ascend[6].flavor = 'natural'
+        } else if (ascend[6].flavor === 'natural') {
+            ascend[6].flavor = 'sharp'
+        };
+        // make a descend var that runs scale through descender
+        var descend = descender(scale);
+        // push ascend and descend to full scale
+        fullScale.push(ascend.concat(descend));
+        //return full scale
+        return fullScale;
+    }
+
 
 
     Scalr.getScale = function (noteVal, noteFlavor, quality) {
@@ -347,10 +374,10 @@ window.Scalr = {};
             return copyScale(minor[noteName]);
         } if (quality === 'harmonic minor') {
             return harmonic(minor[noteName]);
+        } if (quality === 'melodic minor') {
+            return melodic(minor[noteName]);
         }
-
         // use if statement to popint to object from quality input
-
     }
 
 
@@ -367,8 +394,6 @@ window.Scalr = {};
         }
     }
 
-
-    // new approach might be needed for returning different scales. 
     // vexflow front end notation librtary
 
 
