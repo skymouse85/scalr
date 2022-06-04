@@ -341,8 +341,6 @@ window.Scalr = {};
      */
 
     function melodic(scale) {
-        // make full scale array
-        var fullScale = [];
         //copy scale as ascend
         var ascend = copyScale(scale);
         // raise 6th and 7th scale degrees
@@ -358,10 +356,8 @@ window.Scalr = {};
         };
         // make a descend var that runs scale through descender
         var descend = descender(scale);
-        // push ascend and descend to full scale
-        fullScale.push(ascend.concat(descend));
-        //return full scale
-        return fullScale;
+        //concat and return ascend and descend
+        return ascend.concat(descend);
     }
 
 
