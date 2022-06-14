@@ -9,8 +9,7 @@ window.Scalr = {};
 
     //* all chromatic majors and minors are accounted for as is 'correct'
     var major = {
-        //natural majors
-        'C♮': [
+        'Cnatural': [
             { letter: 'C', flavor: 'natural' },
             { letter: 'D', flavor: 'natural' },
             { letter: 'E', flavor: 'natural' },
@@ -20,7 +19,7 @@ window.Scalr = {};
             { letter: 'B', flavor: 'natural' },
             { letter: 'C', flavor: 'natural' },
         ],
-        'C♯': [
+        'Csharp': [
             { letter: 'C', flavor: 'sharp' },
             { letter: 'D', flavor: 'sharp' },
             { letter: 'E', flavor: 'sharp' },
@@ -30,7 +29,7 @@ window.Scalr = {};
             { letter: 'B', flavor: 'sharp' },
             { letter: 'C', flavor: 'sharp' },
         ],
-        'D♭': [
+        'Dflat': [
             { letter: 'D', flavor: 'flat' },
             { letter: 'E', flavor: 'flat' },
             { letter: 'F', flavor: 'natural' },
@@ -40,7 +39,7 @@ window.Scalr = {};
             { letter: 'C', flavor: 'natural' },
             { letter: 'D', flavor: 'flat' },
         ],
-        'D♮': [
+        'Dnatural': [
             { letter: 'D', flavor: 'natural' },
             { letter: 'E', flavor: 'natural' },
             { letter: 'F', flavor: 'sharp' },
@@ -50,7 +49,7 @@ window.Scalr = {};
             { letter: 'C', flavor: 'sharp' },
             { letter: 'D', flavor: 'natural' },
         ],
-        'E♭': [
+        'Eflat': [
             { letter: 'E', flavor: 'flat' },
             { letter: 'F', flavor: 'natural' },
             { letter: 'G', flavor: 'natural' },
@@ -60,7 +59,7 @@ window.Scalr = {};
             { letter: 'D', flavor: 'natural' },
             { letter: 'E', flavor: 'flat' },
         ],
-        'E♮': [
+        'Enatural': [
             { letter: 'E', flavor: 'natural' },
             { letter: 'F', flavor: 'sharp' },
             { letter: 'G', flavor: 'sharp' },
@@ -70,7 +69,7 @@ window.Scalr = {};
             { letter: 'D', flavor: 'sharp' },
             { letter: 'E', flavor: 'natural' },
         ],
-        'F♮': [
+        'Fnatural': [
             { letter: 'F', flavor: 'natural' },
             { letter: 'G', flavor: 'natural' },
             { letter: 'A', flavor: 'natural' },
@@ -80,7 +79,7 @@ window.Scalr = {};
             { letter: 'E', flavor: 'natural' },
             { letter: 'F', flavor: 'natural' },
         ],
-        'F♯': [
+        'Fsharp': [
             { letter: 'F', flavor: 'sharp' },
             { letter: 'G', flavor: 'sharp' },
             { letter: 'A', flavor: 'sharp' },
@@ -90,7 +89,7 @@ window.Scalr = {};
             { letter: 'E', flavor: 'sharp' },
             { letter: 'F', flavor: 'sharp' },
         ],
-        'G♭': [
+        'Gflat': [
             { letter: 'G', flavor: 'flat' },
             { letter: 'A', flavor: 'flat' },
             { letter: 'B', flavor: 'flat' },
@@ -100,7 +99,7 @@ window.Scalr = {};
             { letter: 'F', flavor: 'natural' },
             { letter: 'G', flavor: 'flat' },
         ],
-        'G♮': [
+        'Gnatural': [
             { letter: 'G', flavor: 'natural' },
             { letter: 'A', flavor: 'natural' },
             { letter: 'B', flavor: 'natural' },
@@ -110,7 +109,7 @@ window.Scalr = {};
             { letter: 'F', flavor: 'sharp' },
             { letter: 'G', flavor: 'natural' },
         ],
-        'A♭': [
+        'Aflat': [
             { letter: 'A', flavor: 'flat' },
             { letter: 'B', flavor: 'flat' },
             { letter: 'C', flavor: 'natural' },
@@ -121,7 +120,7 @@ window.Scalr = {};
             { letter: 'A', flavor: 'flat' },
         ],
 
-        'A♮': [
+        'Anatural': [
             { letter: 'A', flavor: 'natural' },
             { letter: 'B', flavor: 'natural' },
             { letter: 'C', flavor: 'sharp' },
@@ -131,7 +130,7 @@ window.Scalr = {};
             { letter: 'G', flavor: 'sharp' },
             { letter: 'A', flavor: 'natural' },
         ],
-        'B♭': [
+        'Bflat': [
             { letter: 'B', flavor: 'flat' },
             { letter: 'C', flavor: 'natural' },
             { letter: 'D', flavor: 'natural' },
@@ -141,7 +140,7 @@ window.Scalr = {};
             { letter: 'A', flavor: 'natural' },
             { letter: 'B', flavor: 'flat' },
         ],
-        'B♮': [
+        'Bnatural': [
             { letter: 'B', flavor: 'natural' },
             { letter: 'C', flavor: 'sharp' },
             { letter: 'D', flavor: 'sharp' },
@@ -151,7 +150,7 @@ window.Scalr = {};
             { letter: 'A', flavor: 'sharp' },
             { letter: 'B', flavor: 'natural' },
         ],
-        'C♭': [
+        'Cflat': [
             { letter: 'C', flavor: 'flat' },
             { letter: 'D', flavor: 'flat' },
             { letter: 'E', flavor: 'flat' },
@@ -165,7 +164,7 @@ window.Scalr = {};
 
     var minor = {
 
-        'A♮': [
+        'Anatural': [
             { letter: 'A', flavor: 'natural' },
             { letter: 'B', flavor: 'natural' },
             { letter: 'C', flavor: 'natural' },
@@ -175,7 +174,7 @@ window.Scalr = {};
             { letter: 'G', flavor: 'natural' },
             { letter: 'A', flavor: 'natural' },
         ],
-        'B♭': [
+        'Bflat': [
             { letter: 'B', flavor: 'flat' },
             { letter: 'C', flavor: 'natural' },
             { letter: 'D', flavor: 'flat' },
@@ -185,7 +184,7 @@ window.Scalr = {};
             { letter: 'A', flavor: 'flat' },
             { letter: 'B', flavor: 'flat' },
         ],
-        'B♮': [
+        'Bnatural': [
             { letter: 'B', flavor: 'natural' },
             { letter: 'C', flavor: 'sharp' },
             { letter: 'D', flavor: 'natural' },
@@ -195,7 +194,7 @@ window.Scalr = {};
             { letter: 'A', flavor: 'natural' },
             { letter: 'B', flavor: 'natural' },
         ],
-        'C♮': [
+        'Cnatural': [
             { letter: 'C', flavor: 'natural' },
             { letter: 'D', flavor: 'natural' },
             { letter: 'E', flavor: 'flat' },
@@ -205,7 +204,7 @@ window.Scalr = {};
             { letter: 'B', flavor: 'flat' },
             { letter: 'C', flavor: 'natural' },
         ],
-        'C♯': [
+        'Csharp': [
             { letter: 'C', flavor: 'sharp' },
             { letter: 'D', flavor: 'sharp' },
             { letter: 'E', flavor: 'natural' },
@@ -215,7 +214,7 @@ window.Scalr = {};
             { letter: 'B', flavor: 'natural' },
             { letter: 'C', flavor: 'sharp' },
         ],
-        'D♮': [
+        'Dnatural': [
             { letter: 'D', flavor: 'natural' },
             { letter: 'E', flavor: 'natural' },
             { letter: 'F', flavor: 'natural' },
@@ -225,7 +224,7 @@ window.Scalr = {};
             { letter: 'C', flavor: 'natural' },
             { letter: 'D', flavor: 'natural' },
         ],
-        'D♯': [
+        'Dsharp': [
             { letter: 'D', flavor: 'sharp' },
             { letter: 'E', flavor: 'sharp' },
             { letter: 'F', flavor: 'sharp' },
@@ -235,7 +234,7 @@ window.Scalr = {};
             { letter: 'C', flavor: 'sharp' },
             { letter: 'D', flavor: 'sharp' },
         ],
-        'E♭': [
+        'Eflat': [
             { letter: 'E', flavor: 'flat' },
             { letter: 'F', flavor: 'natural' },
             { letter: 'G', flavor: 'flat' },
@@ -245,7 +244,7 @@ window.Scalr = {};
             { letter: 'D', flavor: 'flat' },
             { letter: 'E', flavor: 'flat' },
         ],
-        'E♮': [
+        'Enatural': [
             { letter: 'E', flavor: 'natural' },
             { letter: 'F', flavor: 'sharp' },
             { letter: 'G', flavor: 'natural' },
@@ -255,7 +254,7 @@ window.Scalr = {};
             { letter: 'D', flavor: 'natural' },
             { letter: 'E', flavor: 'natural' },
         ],
-        'F♮': [
+        'Fnatural': [
             { letter: 'F', flavor: 'natural' },
             { letter: 'G', flavor: 'natural' },
             { letter: 'A', flavor: 'flat' },
@@ -265,7 +264,7 @@ window.Scalr = {};
             { letter: 'E', flavor: 'flat' },
             { letter: 'F', flavor: 'natural' },
         ],
-        'F♯': [
+        'Fsharp': [
             { letter: 'F', flavor: 'sharp' },
             { letter: 'G', flavor: 'sharp' },
             { letter: 'A', flavor: 'natural' },
@@ -275,7 +274,7 @@ window.Scalr = {};
             { letter: 'E', flavor: 'natural' },
             { letter: 'F', flavor: 'sharp' },
         ],
-        'G♮': [
+        'Gnatural': [
             { letter: 'G', flavor: 'natural' },
             { letter: 'A', flavor: 'natural' },
             { letter: 'B', flavor: 'flat' },
@@ -285,7 +284,7 @@ window.Scalr = {};
             { letter: 'F', flavor: 'natural' },
             { letter: 'G', flavor: 'natural' },
         ],
-        'G♯': [
+        'Gsharp': [
             { letter: 'G', flavor: 'sharp' },
             { letter: 'A', flavor: 'sharp' },
             { letter: 'B', flavor: 'natural' },
@@ -303,6 +302,11 @@ window.Scalr = {};
             scaleCopy.push({ ...scaleArr[i] });
         }
         return scaleCopy;
+    }
+
+    var diminished = {
+
+
     }
     //harmonic minor handler
     /**
@@ -331,7 +335,7 @@ window.Scalr = {};
         }
         return descend;
     }
-    // console.log(descender(minor['B♭']));
+    // console.log(descender(minor['Bflat']));
 
     //*melodic minor handler
     /**
