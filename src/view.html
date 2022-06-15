@@ -13,7 +13,7 @@
     <div id="input">
         <h2>Input</h2>
 
-        <!--add labels to note, flavor,  and tonality inputs-->
+        <!--add labels to note, offset,  and tonality inputs-->
         <form id="inpform">
             <!--note input-->
             <select id="note">
@@ -25,8 +25,8 @@
                 <option>F</option>
                 <option>G</option>
             </select>
-            <!--flavor input-->
-            <select id="flavor">
+            <!--offset input-->
+            <select id="offset">
                 <option value="natural">♮</option>
                 <option value="sharp">♯</option>
                 <option value="flat">♭</option>
@@ -47,7 +47,9 @@
     <div id="output">
         <h2>Output</h2>
         <ul id="scale_output"></ul>
+        <pre><code id="xml_output"></code></pre>
     </div>
+
 </body>
 
 </html>

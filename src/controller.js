@@ -10,31 +10,32 @@ function onReady() {
         // need to clear on submit
 
         var noteVal = $("#note").val()
-        var noteFlavor = $("#flavor").val()
+        var noteoffset = $("#offset").val()
         var quality = $("#quality").val()
-        var scale = Scalr.getScale(noteVal, noteFlavor, quality)
+        var scale = Scalr.getScale(noteVal, noteoffset, quality)
         console.log(scale)
 
-        writeScale(scale);
+        writeScaleDomList(scale);
+        writeScaleMxml(scale);
 
     }
 
 
-    function writeScale(scale) {
+    function writeScaleDomList(scale) {
         var $ul = $("#scale_output") // 
         $ul.empty();
         for (let i = 0; i < scale.length; i++) {
             // for each note in scale...
             var text = "";
             var note = scale[i];
-            text += note.letter;
+            text += Scalr.getLetter(note.step);
             text += ' '
-            if (note.flavor === 'sharp') {
+            if (note.offset === 1) {
                 text += '♯'
-            } else if (note.flavor === 'flat') {
+            } else if (note.offset === -1) {
                 text += '♭'
             }
-            //// work on basic text output for accidentals - if note.flavor  ===  flat {note.flavor = b} ect...
+            //// work on basic text output for accidentals - if note.offset  ===  flat {note.offset = b} ect...
 
             text += ' ';
             var $li = $('<li></li>') // li is a jquery object
@@ -44,6 +45,65 @@ function onReady() {
 
         }
 
+    }
+    {/* <note>
+        <pitch>
+          <step>C</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <type>whole</type>
+      </note> */}
+
+    function writeScaleMxml(scale) {
+        var notesXml = '';
+        for (let i = 0; i < scale.length; i++) {
+            let note = scale[i]
+            notesXml += `
+          <note>
+            <pitch>
+              <alter>${note.offset}</alter>
+              <step>${Scalr.getLetter(note.step)}</step>
+              <octave>4</octave>
+            </pitch>
+            <duration>1</duration>
+            <type>quarter</type>
+            <accidental>${Scalr.getAccidental(note.offset)}</accidental>
+        </note>\n`
+        }
+
+        var output = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE score-partwise PUBLIC
+    "-//Recordare//DTD MusicXML 4.0 Partwise//EN"
+    "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="4.0">
+  <part-list>
+    <score-part id="P1">
+      <part-name>vibraphone</part-name>
+    </score-part>
+  </part-list>
+  <part id="P1">
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+        <key>
+          <fifths>0</fifths>
+        </key>
+        <time>
+          <beats>${scale.length}</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+      </attributes>
+      ${notesXml}
+    </measure>
+  </part>
+</score-partwise>`
+
+        $('#xml_output').text(output)
     }
 
 

@@ -8,293 +8,287 @@ window.Scalr = {};
      */
 
     //* all chromatic majors and minors are accounted for as is 'correct'
+
+    //! offset to offset, natural = 0, sharp = 1, flat = -1
+    //! drop the top octave note
+    //! note hashmap, add in view if desired
+    //! step to step
+
+    const LETTERS = {
+        0: 'C',
+        1: 'D',
+        2: 'E',
+        3: 'F',
+        4: 'G',
+        5: 'A',
+        6: 'B'
+    }
+
+    const ACCIDENTS = {
+        '-1': 'flat',
+        '0': 'natural',
+        '1': 'sharp'
+    }
     var major = {
         'Cnatural': [
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'natural' },
+            { step: 0, offset: 0 },
+            { step: 1, offset: 0 },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 0 },
+            { step: 4, offset: 0 },
+            { step: 5, offset: 0 },
+            { step: 6, offset: 0 },
         ],
         'Csharp': [
-            { letter: 'C', flavor: 'sharp' },
-            { letter: 'D', flavor: 'sharp' },
-            { letter: 'E', flavor: 'sharp' },
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'sharp' },
-            { letter: 'A', flavor: 'sharp' },
-            { letter: 'B', flavor: 'sharp' },
-            { letter: 'C', flavor: 'sharp' },
+            { step: 0, offset: 1 },
+            { step: 1, offset: 1 },
+            { step: 2, offset: 1 },
+            { step: 3, offset: 1 },
+            { step: 4, offset: 1 },
+            { step: 5, offset: 1 },
+            { step: 6, offset: 1 },
         ],
         'Dflat': [
-            { letter: 'D', flavor: 'flat' },
-            { letter: 'E', flavor: 'flat' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'flat' },
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'flat' },
+            { step: 1, offset: -1 },
+            { step: 2, offset: -1 },
+            { step: 3, offset: 0 },
+            { step: 4, offset: 0 },
+            { step: 5, offset: -1 },
+            { step: 6, offset: -1 },
+            { step: 0, offset: 0 },
         ],
         'Dnatural': [
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'sharp' },
-            { letter: 'D', flavor: 'natural' },
+            { step: 1, offset: 0 },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 1 },
+            { step: 4, offset: 0 },
+            { step: 5, offset: 0 },
+            { step: 6, offset: 0 },
+            { step: 0, offset: 1 },
         ],
         'Eflat': [
-            { letter: 'E', flavor: 'flat' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'flat' },
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'flat' },
+            { step: 2, offset: -1 },
+            { step: 3, offset: 0 },
+            { step: 4, offset: 0 },
+            { step: 5, offset: -1 },
+            { step: 6, offset: -1 },
+            { step: 0, offset: 0 },
+            { step: 1, offset: 0 },
         ],
         'Enatural': [
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'sharp' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'sharp' },
-            { letter: 'D', flavor: 'sharp' },
-            { letter: 'E', flavor: 'natural' },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 1 },
+            { step: 4, offset: 1 },
+            { step: 5, offset: 0 },
+            { step: 6, offset: 0 },
+            { step: 0, offset: 1 },
+            { step: 1, offset: 1 },
         ],
         'Fnatural': [
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'natural' },
+            { step: 3, offset: 0 },
+            { step: 4, offset: 0 },
+            { step: 5, offset: 0 },
+            { step: 6, offset: -1 },
+            { step: 0, offset: 0 },
+            { step: 1, offset: 0 },
+            { step: 2, offset: 0 },
         ],
         'Fsharp': [
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'sharp' },
-            { letter: 'A', flavor: 'sharp' },
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'sharp' },
-            { letter: 'D', flavor: 'sharp' },
-            { letter: 'E', flavor: 'sharp' },
-            { letter: 'F', flavor: 'sharp' },
+            { step: 3, offset: 1 },
+            { step: 4, offset: 1 },
+            { step: 5, offset: 1 },
+            { step: 6, offset: 0 },
+            { step: 0, offset: 1 },
+            { step: 1, offset: 1 },
+            { step: 2, offset: 1 },
         ],
         'Gflat': [
-            { letter: 'G', flavor: 'flat' },
-            { letter: 'A', flavor: 'flat' },
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'flat' },
-            { letter: 'D', flavor: 'flat' },
-            { letter: 'E', flavor: 'flat' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'flat' },
+            { step: 4, offset: -1 },
+            { step: 5, offset: -1 },
+            { step: 6, offset: -1 },
+            { step: 0, offset: -1 },
+            { step: 1, offset: -1 },
+            { step: 2, offset: -1 },
+            { step: 3, offset: 0 },
         ],
         'Gnatural': [
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'natural' },
+            { step: 4, offset: 0 },
+            { step: 5, offset: 0 },
+            { step: 6, offset: 0 },
+            { step: 0, offset: 0 },
+            { step: 1, offset: 0 },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 1 },
         ],
         'Aflat': [
-            { letter: 'A', flavor: 'flat' },
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'flat' },
-            { letter: 'E', flavor: 'flat' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'flat' },
+            { step: 5, offset: -1 },
+            { step: 6, offset: -1 },
+            { step: 0, offset: 0 },
+            { step: 1, offset: -1 },
+            { step: 2, offset: -1 },
+            { step: 3, offset: 0 },
+            { step: 4, offset: 0 },
         ],
 
         'Anatural': [
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'sharp' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'sharp' },
-            { letter: 'A', flavor: 'natural' },
+            { step: 5, offset: 0 },
+            { step: 6, offset: 0 },
+            { step: 0, offset: 1 },
+            { step: 1, offset: 0 },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 1 },
+            { step: 4, offset: 1 },
         ],
         'Bflat': [
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'flat' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'flat' },
+            { step: 6, offset: -1 },
+            { step: 0, offset: 0 },
+            { step: 1, offset: 0 },
+            { step: 2, offset: -1 },
+            { step: 3, offset: 0 },
+            { step: 4, offset: 0 },
+            { step: 5, offset: 0 },
         ],
         'Bnatural': [
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'sharp' },
-            { letter: 'D', flavor: 'sharp' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'sharp' },
-            { letter: 'A', flavor: 'sharp' },
-            { letter: 'B', flavor: 'natural' },
+            { step: 6, offset: 0 },
+            { step: 0, offset: 1 },
+            { step: 1, offset: 1 },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 1 },
+            { step: 4, offset: 1 },
+            { step: 5, offset: 1 },
         ],
         'Cflat': [
-            { letter: 'C', flavor: 'flat' },
-            { letter: 'D', flavor: 'flat' },
-            { letter: 'E', flavor: 'flat' },
-            { letter: 'F', flavor: 'flat' },
-            { letter: 'G', flavor: 'flat' },
-            { letter: 'A', flavor: 'flat' },
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'flat' },
+            { step: 0, offset: -1 },
+            { step: 1, offset: -1 },
+            { step: 2, offset: -1 },
+            { step: 3, offset: -1 },
+            { step: 4, offset: -1 },
+            { step: 5, offset: -1 },
+            { step: 6, offset: -1 },
         ]
     }
 
     var minor = {
 
         'Anatural': [
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'natural' },
+            { step: 5, offset: 0 },
+            { step: 6, offset: 0 },
+            { step: 0, offset: 0 },
+            { step: 1, offset: 0 },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 0 },
+            { step: 4, offset: 0 },
         ],
         'Bflat': [
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'flat' },
-            { letter: 'E', flavor: 'flat' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'flat' },
-            { letter: 'A', flavor: 'flat' },
-            { letter: 'B', flavor: 'flat' },
+            { step: 6, offset: -1 },
+            { step: 0, offset: 0 },
+            { step: 1, offset: -1 },
+            { step: 2, offset: -1 },
+            { step: 3, offset: 0 },
+            { step: 4, offset: -1 },
+            { step: 5, offset: -1 },
         ],
         'Bnatural': [
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'sharp' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'natural' },
+            { step: 6, offset: 0 },
+            { step: 0, offset: 1 },
+            { step: 1, offset: 0 },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 1 },
+            { step: 4, offset: 0 },
+            { step: 5, offset: 0 },
         ],
         'Cnatural': [
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'flat' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'flat' },
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'natural' },
+            { step: 0, offset: 0 },
+            { step: 1, offset: 0 },
+            { step: 2, offset: -1 },
+            { step: 3, offset: 0 },
+            { step: 4, offset: 0 },
+            { step: 5, offset: -1 },
+            { step: 6, offset: -1 },
         ],
         'Csharp': [
-            { letter: 'C', flavor: 'sharp' },
-            { letter: 'D', flavor: 'sharp' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'sharp' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'sharp' },
+            { step: 0, offset: 1 },
+            { step: 1, offset: 1 },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 1 },
+            { step: 4, offset: 1 },
+            { step: 5, offset: 0 },
+            { step: 6, offset: 0 },
         ],
         'Dnatural': [
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'natural' },
+            { step: 1, offset: 0 },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 0 },
+            { step: 4, offset: 0 },
+            { step: 5, offset: 0 },
+            { step: 6, offset: -1 },
+            { step: 0, offset: 0 },
         ],
         'Dsharp': [
-            { letter: 'D', flavor: 'sharp' },
-            { letter: 'E', flavor: 'sharp' },
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'sharp' },
-            { letter: 'A', flavor: 'sharp' },
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'sharp' },
-            { letter: 'D', flavor: 'sharp' },
+            { step: 1, offset: 1 },
+            { step: 2, offset: 1 },
+            { step: 3, offset: 1 },
+            { step: 4, offset: 1 },
+            { step: 5, offset: 1 },
+            { step: 6, offset: 0 },
+            { step: 0, offset: 1 },
         ],
         'Eflat': [
-            { letter: 'E', flavor: 'flat' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'flat' },
-            { letter: 'A', flavor: 'flat' },
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'flat' },
-            { letter: 'D', flavor: 'flat' },
-            { letter: 'E', flavor: 'flat' },
+            { step: 2, offset: -1 },
+            { step: 3, offset: 0 },
+            { step: 4, offset: -1 },
+            { step: 5, offset: -1 },
+            { step: 6, offset: -1 },
+            { step: 0, offset: -1 },
+            { step: 1, offset: -1 },
         ],
         'Enatural': [
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'natural' },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 1 },
+            { step: 4, offset: 0 },
+            { step: 5, offset: 0 },
+            { step: 4, offset: 0 },
+            { step: 0, offset: 0 },
+            { step: 1, offset: 0 },
         ],
         'Fnatural': [
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'flat' },
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'flat' },
-            { letter: 'E', flavor: 'flat' },
-            { letter: 'F', flavor: 'natural' },
+            { step: 3, offset: 0 },
+            { step: 4, offset: 0 },
+            { step: 5, offset: -1 },
+            { step: 6, offset: -1 },
+            { step: 0, offset: 0 },
+            { step: 1, offset: -1 },
+            { step: 2, offset: -1 },
         ],
         'Fsharp': [
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'sharp' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'sharp' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'sharp' },
+            { step: 3, offset: 1 },
+            { step: 4, offset: 1 },
+            { step: 5, offset: 0 },
+            { step: 6, offset: 0 },
+            { step: 0, offset: 1 },
+            { step: 1, offset: 0 },
+            { step: 2, offset: 0 },
         ],
         'Gnatural': [
-            { letter: 'G', flavor: 'natural' },
-            { letter: 'A', flavor: 'natural' },
-            { letter: 'B', flavor: 'flat' },
-            { letter: 'C', flavor: 'natural' },
-            { letter: 'D', flavor: 'natural' },
-            { letter: 'E', flavor: 'flat' },
-            { letter: 'F', flavor: 'natural' },
-            { letter: 'G', flavor: 'natural' },
+            { step: 4, offset: 0 },
+            { step: 5, offset: 0 },
+            { step: 6, offset: -1 },
+            { step: 0, offset: 0 },
+            { step: 1, offset: 0 },
+            { step: 2, offset: -1 },
+            { step: 3, offset: 0 },
         ],
         'Gsharp': [
-            { letter: 'G', flavor: 'sharp' },
-            { letter: 'A', flavor: 'sharp' },
-            { letter: 'B', flavor: 'natural' },
-            { letter: 'C', flavor: 'sharp' },
-            { letter: 'D', flavor: 'sharp' },
-            { letter: 'E', flavor: 'natural' },
-            { letter: 'F', flavor: 'sharp' },
-            { letter: 'G', flavor: 'sharp' },
+            { step: 4, offset: 1 },
+            { step: 5, offset: 1 },
+            { step: 6, offset: 0 },
+            { step: 0, offset: 1 },
+            { step: 1, offset: 1 },
+            { step: 2, offset: 0 },
+            { step: 3, offset: 1 },
         ],
     }
+
 
     function copyScale(scaleArr) {
         var scaleCopy = [];
@@ -305,8 +299,6 @@ window.Scalr = {};
     }
 
     var diminished = {
-
-
     }
     //harmonic minor handler
     /**
@@ -316,10 +308,10 @@ window.Scalr = {};
      */
     function harmonic(scale) {
         scale = copyScale(scale)
-        if (scale[6].flavor === 'flat') {
-            scale[6].flavor = 'natural'
-        } else if (scale[6].flavor === 'natural') {
-            scale[6].flavor = 'sharp'
+        if (scale[6].offset === -1) {
+            scale[6].offset = 0
+        } else if (scale[6].offset === 0) {
+            scale[6].offset = 1
         };
         return scale;
     }
@@ -348,15 +340,15 @@ window.Scalr = {};
         //copy scale as ascend
         var ascend = copyScale(scale);
         // raise 6th and 7th scale degrees
-        if (ascend[5].flavor === 'flat') {
-            ascend[5].flavor = 'natural'
-        } else if (ascend[5].flavor === 'natural') {
-            ascend[5].flavor = 'sharp'
+        if (ascend[5].offset === -1) {
+            ascend[5].offset = 0
+        } else if (ascend[5].offset === 0) {
+            ascend[5].offset = 1
         };
-        if (ascend[6].flavor === 'flat') {
-            ascend[6].flavor = 'natural'
-        } else if (ascend[6].flavor === 'natural') {
-            ascend[6].flavor = 'sharp'
+        if (ascend[6].offset === -1) {
+            ascend[6].offset = 0
+        } else if (ascend[6].offset === 0) {
+            ascend[6].offset = 1
         };
         // make a descend var that runs scale through descender
         var descend = descender(scale);
@@ -364,10 +356,10 @@ window.Scalr = {};
         return ascend.concat(descend);
     }
 
+    // opts hashmap
 
-
-    Scalr.getScale = function (noteVal, noteFlavor, quality) {
-        var noteName = noteVal + noteFlavor;
+    Scalr.getScale = function (noteVal, noteoffset, quality) {
+        var noteName = noteVal + noteoffset;
         if (quality === 'major') {
             return copyScale(major[noteName]);
         } if (quality === 'natural minor') {
@@ -379,7 +371,12 @@ window.Scalr = {};
         }
         // use if statement to popint to object from quality input
     }
-
+    Scalr.getLetter = function (step) {
+        return LETTERS[step]
+    }
+    Scalr.getAccidental = function (offset) {
+        return ACCIDENTS[offset]
+    }
 
     //todo work on scale name output as part of scale object and Scaler.getScale based on tonality input
     //todo write test to check each note name and get all scales and prints any that are missing
@@ -388,9 +385,9 @@ window.Scalr = {};
     //* i'll still include Eb minor, GbMajor, Cb Major, Db major
     function scaleCheck(majorScaleObj, minorScaleObj) {
         var scaleRef = {
-            major: 'A',
-            major: 'B',
-            major: 'C',
+            major: 5,
+            major: 6,
+            major: 0,
         }
     }
 
