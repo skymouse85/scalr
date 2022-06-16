@@ -3,63 +3,68 @@
 $(document).ready(onReady)
 
 function onReady() {
-    $('#inpform').on('submit', onSubmit)
+  $('#inpform').on('submit', onSubmit)
 
-    function onSubmit(event) {
-        event.preventDefault(); //prevents from submitting and reloading page
-        // need to clear on submit
+  function onSubmit(event) {
+    event.preventDefault(); //prevents from submitting and reloading page
+    // need to clear on submit
 
-        var noteVal = $("#note").val()
-        var noteoffset = $("#offset").val()
-        var quality = $("#quality").val()
-        var scale = Scalr.getScale(noteVal, noteoffset, quality)
-        console.log(scale)
+    var noteVal = $("#note").val()
+    var noteoffset = $("#offset").val()
+    var quality = $("#quality").val()
+    var clef = $("#clef").val()
+    var scale = Scalr.getScale(noteVal, noteoffset, quality)
+    console.log(scale)
 
-        writeScaleDomList(scale);
-        writeScaleMxml(scale);
+    writeScaleDomList(scale);
+    writeScaleMxml(scale);
+
+  }
+
+
+  function writeScaleDomList(scale) {
+    var $ul = $("#scale_output") // 
+    $ul.empty();
+    for (let i = 0; i < scale.length; i++) {
+      // for each note in scale...
+      var text = "";
+      var note = scale[i];
+      text += Scalr.getLetter(note.step);
+      text += ' '
+      if (note.offset === 1) {
+        text += '♯'
+      } else if (note.offset === -1) {
+        text += '♭'
+      }
+      //// work on basic text output for accidentals - if note.offset  ===  flat {note.offset = b} ect...
+
+      text += ' ';
+      var $li = $('<li></li>') // li is a jquery object
+      $li.text(text);
+
+      $li.appendTo($ul)
 
     }
 
+  }
+  // handle octave diesplacement, start with default of treble clef 
 
-    function writeScaleDomList(scale) {
-        var $ul = $("#scale_output") // 
-        $ul.empty();
-        for (let i = 0; i < scale.length; i++) {
-            // for each note in scale...
-            var text = "";
-            var note = scale[i];
-            text += Scalr.getLetter(note.step);
-            text += ' '
-            if (note.offset === 1) {
-                text += '♯'
-            } else if (note.offset === -1) {
-                text += '♭'
-            }
-            //// work on basic text output for accidentals - if note.offset  ===  flat {note.offset = b} ect...
-
-            text += ' ';
-            var $li = $('<li></li>') // li is a jquery object
-            $li.text(text);
-
-            $li.appendTo($ul)
-
-        }
-
-    }
-    {/* <note>
-        <pitch>
-          <step>C</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>4</duration>
-        <type>whole</type>
-      </note> */}
-
-    function writeScaleMxml(scale) {
-        var notesXml = '';
-        for (let i = 0; i < scale.length; i++) {
-            let note = scale[i]
-            notesXml += `
+  function writeScaleMxml(scale, clef) {
+    var root = scale[0]
+    var notesXml = `
+    <note>
+      <pitch>
+        <alter>${root.offset}</alter>
+        <step>${Scalr.getLetter(root.step)}</step>
+        <octave>3</octave>
+      </pitch>
+      <duration>1</duration>
+      <type>quarter</type>
+      <accidental>${Scalr.getAccidental(root.offset)}</accidental>
+  </note>\n`;
+    for (let i = 1; i < scale.length; i++) {
+      let note = scale[i]
+      notesXml += `
           <note>
             <pitch>
               <alter>${note.offset}</alter>
@@ -70,9 +75,9 @@ function onReady() {
             <type>quarter</type>
             <accidental>${Scalr.getAccidental(note.offset)}</accidental>
         </note>\n`
-        }
+    }
 
-        var output = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    var output = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC
     "-//Recordare//DTD MusicXML 4.0 Partwise//EN"
     "http://www.musicxml.org/dtds/partwise.dtd">
@@ -103,8 +108,8 @@ function onReady() {
   </part>
 </score-partwise>`
 
-        $('#xml_output').text(output)
-    }
+    $('#xml_output').text(output)
+  }
 
 
 }
