@@ -31,58 +31,58 @@ window.Scalr = {};
     }
     var major = {
         'Cnatural': [
-            { step: 0, offset: 0 },
-            { step: 1, offset: 0 },
-            { step: 2, offset: 0 },
-            { step: 3, offset: 0 },
-            { step: 4, offset: 0 },
-            { step: 5, offset: 0 },
-            { step: 6, offset: 0 },
+            { step: 0, offset: 0, trebleRange: 4 },
+            { step: 1, offset: 0, trebleRange: 4 },
+            { step: 2, offset: 0, trebleRange: 4 },
+            { step: 3, offset: 0, trebleRange: 4 },
+            { step: 4, offset: 0, trebleRange: 4 },
+            { step: 5, offset: 0, trebleRange: 4 },
+            { step: 6, offset: 0, trebleRange: 4 },
         ],
         'Csharp': [
-            { step: 0, offset: 1 },
-            { step: 1, offset: 1 },
-            { step: 2, offset: 1 },
-            { step: 3, offset: 1 },
-            { step: 4, offset: 1 },
-            { step: 5, offset: 1 },
-            { step: 6, offset: 1 },
+            { step: 0, offset: 1, trebleRange: 4 },
+            { step: 1, offset: 1, trebleRange: 4 },
+            { step: 2, offset: 1, trebleRange: 4 },
+            { step: 3, offset: 1, trebleRange: 4 },
+            { step: 4, offset: 1, trebleRange: 4 },
+            { step: 5, offset: 1, trebleRange: 4 },
+            { step: 6, offset: 1, trebleRange: 5 },
         ],
         'Dflat': [
-            { step: 1, offset: -1 },
-            { step: 2, offset: -1 },
-            { step: 3, offset: 0 },
-            { step: 4, offset: 0 },
-            { step: 5, offset: -1 },
-            { step: 6, offset: -1 },
-            { step: 0, offset: 0 },
+            { step: 1, offset: -1, trebleRange: 4 },
+            { step: 2, offset: -1, trebleRange: 4 },
+            { step: 3, offset: 0, trebleRange: 4 },
+            { step: 4, offset: 0, trebleRange: 4 },
+            { step: 5, offset: -1, trebleRange: 4 },
+            { step: 6, offset: -1, trebleRange: 4 },
+            { step: 0, offset: 0, trebleRange: 5 },
         ],
         'Dnatural': [
-            { step: 1, offset: 0 },
-            { step: 2, offset: 0 },
-            { step: 3, offset: 1 },
-            { step: 4, offset: 0 },
-            { step: 5, offset: 0 },
-            { step: 6, offset: 0 },
-            { step: 0, offset: 1 },
+            { step: 1, offset: 0, trebleRange: 4 },
+            { step: 2, offset: 0, trebleRange: 4 },
+            { step: 3, offset: 1, trebleRange: 4 },
+            { step: 4, offset: 0, trebleRange: 4 },
+            { step: 5, offset: 0, trebleRange: 4 },
+            { step: 6, offset: 0, trebleRange: 4 },
+            { step: 0, offset: 1, trebleRange: 5 },
         ],
         'Eflat': [
-            { step: 2, offset: -1 },
-            { step: 3, offset: 0 },
-            { step: 4, offset: 0 },
-            { step: 5, offset: -1 },
-            { step: 6, offset: -1 },
-            { step: 0, offset: 0 },
-            { step: 1, offset: 0 },
+            { step: 2, offset: -1, trebleRange: 4 },
+            { step: 3, offset: 0, trebleRange: 4 },
+            { step: 4, offset: 0, trebleRange: 4 },
+            { step: 5, offset: -1, trebleRange: 4 },
+            { step: 6, offset: -1, trebleRange: 4 },
+            { step: 0, offset: 0, trebleRange: 5 },
+            { step: 1, offset: 0, trebleRange: 5 },
         ],
         'Enatural': [
-            { step: 2, offset: 0 },
-            { step: 3, offset: 1 },
-            { step: 4, offset: 1 },
-            { step: 5, offset: 0 },
-            { step: 6, offset: 0 },
-            { step: 0, offset: 1 },
-            { step: 1, offset: 1 },
+            { step: 2, offset: 0, trebleRange: 4 },
+            { step: 3, offset: 1, trebleRange: 4 },
+            { step: 4, offset: 1, trebleRange: 4 },
+            { step: 5, offset: 0, trebleRange: 4 },
+            { step: 6, offset: 0, trebleRange: 4 },
+            { step: 0, offset: 1, trebleRange: 5 },
+            { step: 1, offset: 1, trebleRange: 5 },
         ],
         'Fnatural': [
             { step: 3, offset: 0 },
@@ -289,6 +289,73 @@ window.Scalr = {};
         ],
     }
 
+    var trebleRanges = {
+        'C': [
+            { degree: 0, trebleRange: 4 },
+            { degree: 1, range: 4 },
+            { degree: 2, range: 4 },
+            { degree: 3, range: 4 },
+            { degree: 4, range: 4 },
+            { degree: 5, range: 4 },
+            { degree: 6, range: 4 },
+        ],
+        'D': [
+            { degree: 0, range: 4 },
+            { degree: 1, range: 4 },
+            { degree: 2, range: 4 },
+            { degree: 3, range: 4 },
+            { degree: 4, range: 4 },
+            { degree: 5, range: 4 },
+            { degree: 6, range: 5 },
+        ],
+        'E': [
+            { degree: 0, range: 4 },
+            { degree: 1, range: 4 },
+            { degree: 2, range: 4 },
+            { degree: 3, range: 4 },
+            { degree: 4, range: 4 },
+            { degree: 5, range: 5 },
+            { degree: 6, range: 5 },
+        ],
+        'F': [
+            { degree: 0, range: 4 },
+            { degree: 1, range: 4 },
+            { degree: 2, range: 4 },
+            { degree: 3, range: 4 },
+            { degree: 4, range: 5 },
+            { degree: 5, range: 5 },
+            { degree: 6, range: 5 },
+        ],
+        'G': [
+            { degree: 0, range: 4 },
+            { degree: 1, range: 4 },
+            { degree: 2, range: 4 },
+            { degree: 3, range: 5 },
+            { degree: 4, range: 5 },
+            { degree: 5, range: 5 },
+            { degree: 6, range: 5 },
+        ],
+        'A': [
+            { degree: 0, range: 3 },
+            { degree: 1, range: 3 },
+            { degree: 2, range: 4 },
+            { degree: 3, range: 4 },
+            { degree: 4, range: 4 },
+            { degree: 5, range: 4 },
+            { degree: 6, range: 4 },
+        ],
+        'B': [
+            { degree: 0, range: 3 },
+            { degree: 1, range: 4 },
+            { degree: 2, range: 4 },
+            { degree: 3, range: 4 },
+            { degree: 4, range: 4 },
+            { degree: 5, range: 4 },
+            { degree: 6, range: 4 },
+        ]
+
+    }
+
 
     function copyScale(scaleArr) {
         var scaleCopy = [];
@@ -371,12 +438,29 @@ window.Scalr = {};
         }
         // use if statement to popint to object from quality input
     }
+
     Scalr.getLetter = function (step) {
         return LETTERS[step]
     }
     Scalr.getAccidental = function (offset) {
         return ACCIDENTS[offset]
     }
+    Scalr.getRange = function (clef, note) {
+        if (clef === 'Treble') {
+            return note[trebleRanges]
+        }
+        else if (clef === 'Bass') {
+            return note[bassRanges]
+        }
+    }
+
+    // Scalr.getRange = function (scale, clef) {
+    //     var range = 4
+    //     if (scale[0] === 'Anatural' && clef === 'Treble') {
+    //         range
+    //     }
+
+    // }
 
     //todo work on scale name output as part of scale object and Scaler.getScale based on tonality input
     //todo write test to check each note name and get all scales and prints any that are missing
@@ -390,10 +474,6 @@ window.Scalr = {};
             major: 0,
         }
     }
-
-    // vexflow front end notation librtary
-
-
 })()
 
 
