@@ -1,5 +1,5 @@
-// coordinate between view and model
 
+// coordinate between view and model
 $(document).ready(onReady)
 
 function onReady() {
@@ -17,7 +17,7 @@ function onReady() {
     console.log(scale)
 
     writeScaleDomList(scale);
-    writeScaleMxml(scale);
+    writeScaleMxml(scale, clef);
 
   }
 
@@ -48,28 +48,29 @@ function onReady() {
 
   }
   // handle octave diesplacement, start with default of treble clef 
+  // middle c = C4
+  // stem direction - 
+  //Bass clef
+  // UP C1 - C3
+  //DOWN D3 - B3
+  //Treble clef
+  // UP C4 - A4
+  // DOWN B4 - B7  
 
   function writeScaleMxml(scale, clef) {
-    var root = scale[0]
-    var notesXml = `
-    <note>
-      <pitch>
-        <alter>${root.offset}</alter>
-        <step>${Scalr.getLetter(root.step)}</step>
-        <octave>3</octave>
-      </pitch>
-      <duration>1</duration>
-      <type>quarter</type>
-      <accidental>${Scalr.getAccidental(root.offset)}</accidental>
-  </note>\n`;
-    for (let i = 1; i < scale.length; i++) {
+
+    // if clef === treble and root is not a,b --> root octave = 4
+
+
+    for (let i = 0; i < scale.length; i++) {
+      var notesXml = ``
       let note = scale[i]
       notesXml += `
           <note>
             <pitch>
               <alter>${note.offset}</alter>
               <step>${Scalr.getLetter(note.step)}</step>
-              <octave>4</octave>
+              <octave>${Scalr.getRange(clef, note.step)}</octave>
             </pitch>
             <duration>1</duration>
             <type>quarter</type>
