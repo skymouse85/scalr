@@ -16,37 +16,37 @@ function onReady() {
     var scale = Scalr.getScale(noteVal, noteoffset, quality)
     console.log(scale)
 
-    // writeScaleDomList(scale);
+    writeScaleDomList(scale);
     writeScaleMxml(scale, clef);
 
   }
 
 
-  // function writeScaleDomList(scale) {
-  //   var $ul = $("#scale_output") // 
-  //   $ul.empty();
-  //   for (let i = 0; i < scale.length; i++) {
-  //     // for each note in scale...
-  //     var text = "";
-  //     var note = scale[i];
-  //     text += Scalr.getLetter(note.step);
-  //     text += ' '
-  //     if (note.offset === 1) {
-  //       text += '♯'
-  //     } else if (note.offset === -1) {
-  //       text += '♭'
-  //     }
-  //     //// work on basic text output for accidentals - if note.offset  ===  flat {note.offset = b} ect...
+  function writeScaleDomList(scale) {
+    var $ul = $("#scale_output") // 
+    $ul.empty();
+    for (let i = 0; i < scale.length; i++) {
+      // for each note in scale...
+      var text = "";
+      var note = scale[i];
+      text += Scalr.getLetter(note.step);
+      text += ' '
+      if (note.offset === 1) {
+        text += '♯'
+      } else if (note.offset === -1) {
+        text += '♭'
+      }
+      //// work on basic text output for accidentals - if note.offset  ===  flat {note.offset = b} ect...
 
-  //     text += ' ';
-  //     var $li = $('<li></li>') // li is a jquery object
-  //     $li.text(text);
+      text += ' ';
+      var $li = $('<li></li>') // li is a jquery object
+      $li.text(text);
 
-  //     $li.appendTo($ul)
+      $li.appendTo($ul)
 
-  //   }
+    }
 
-  // }
+  }
   // handle octave diesplacement, start with default of treble clef 
   // middle c = C4
   // stem direction - 
