@@ -386,6 +386,16 @@ window.Scalr = {};
     Scalr.getAccidental = function (offset) {
         return ACCIDENTS[offset]
     }
+
+    //XML specific functions
+
+    /**
+     * 
+     * @param {user defined} clef 
+     * @param {} note 
+     * @returns  proper note range for ascending scale
+     */
+
     Scalr.getRange = function (clef, note) {
         if (clef === 'Treble') {
             return note.trebleRange
@@ -395,6 +405,11 @@ window.Scalr = {};
         }
     }
 
+    /**
+     * 
+     * @param {*} clef 
+     * @returns XML code for clef sign
+     */
     Scalr.clefSign = function (clef) {
         if (clef === 'Treble') {
             return CLEFS.Treble[0].sign;
@@ -403,6 +418,11 @@ window.Scalr = {};
             return CLEFS.Bass[0].sign;
         }
     }
+    /**
+     * 
+     * @param {*} clef 
+     * @returns XML code for clef line
+     */
     Scalr.clefLine = function (clef) {
         if (clef === 'Treble') {
             return CLEFS.Treble[0].line;
@@ -412,13 +432,7 @@ window.Scalr = {};
         }
     }
 
-    // Scalr.getRange = function (scale, clef) {
-    //     var range = 4
-    //     if (scale[0] === 'Anatural' && clef === 'Treble') {
-    //         range
-    //     }
 
-    // }
 
     //todo work on scale name output as part of scale object and Scaler.getScale based on tonality input
     //todo write test to check each note name and get all scales and prints any that are missing
