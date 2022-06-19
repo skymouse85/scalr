@@ -70,7 +70,7 @@ function onReady() {
             <pitch>
               <alter>${note.offset}</alter>
               <step>${Scalr.getLetter(note.step)}</step>
-              <octave>${Scalr.getRange(clef, note.step)}</octave>
+              <octave>${Scalr.getRange(clef, Scalr.getLetter(note.step))}</octave>
             </pitch>
             <duration>1</duration>
             <type>quarter</type>
