@@ -447,10 +447,10 @@ window.Scalr = {};
     }
     Scalr.getRange = function (clef, note) {
         if (clef === 'Treble') {
-            return note[trebleRanges]
+            return note.trebleRange
         }
         else if (clef === 'Bass') {
-            return note[bassRanges]
+            return note.bassRange
         }
     }
 
