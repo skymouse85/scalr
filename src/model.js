@@ -450,7 +450,7 @@ window.Scalr = {};
             return note.trebleRange
         }
         else if (clef === 'Bass') {
-            return note.bassRange
+            return note.trebleRange - 1
         }
     }
 

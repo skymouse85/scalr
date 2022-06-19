@@ -77,7 +77,7 @@ function onReady() {
             <accidental>${Scalr.getAccidental(note.offset)}</accidental>
         </note>\n`
     }
-
+    //todo deal with clef output
     var output = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC
     "-//Recordare//DTD MusicXML 4.0 Partwise//EN"
