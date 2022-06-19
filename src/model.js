@@ -29,6 +29,15 @@ window.Scalr = {};
         '0': 'natural',
         '1': 'sharp'
     }
+    const CLEFS = {
+        Treble: [
+            { sign: 'G', line: 2 }
+        ],
+        Bass: [
+            { sign: 'F', line: 4 }
+        ]
+    }
+
     var major = {
         'Cnatural': [
             { step: 0, offset: 0, trebleRange: 4 },
@@ -451,6 +460,23 @@ window.Scalr = {};
         }
         else if (clef === 'Bass') {
             return note.trebleRange - 1
+        }
+    }
+
+    Scalr.clefSign = function (clef) {
+        if (clef === 'Treble') {
+            return CLEFS.Treble[0].sign;
+        }
+        else if (clef === 'Bass') {
+            return CLEFS.Bass[0].sign;
+        }
+    }
+    Scalr.clefLine = function (clef) {
+        if (clef === 'Treble') {
+            return CLEFS.Treble[0].line;
+        }
+        else if (clef === 'Bass') {
+            return CLEFS.Bass[0].line;
         }
     }
 
