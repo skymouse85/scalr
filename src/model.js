@@ -37,6 +37,9 @@ window.Scalr = {};
             { sign: 'F', line: 4 }
         ]
     }
+    const PITCHES = {
+
+    }
 
     var major = {
         'Cnatural': [
