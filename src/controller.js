@@ -14,8 +14,6 @@ function onReady() {
     var quality = $("#quality").val()
     var clef = $("#clef").val()
     var scale = Scalr.getScale(noteVal, noteoffset, quality)
-    console.log(clef.toLowerCase())
-    console.log(scale)
 
     writeScaleDomList(scale);
     writeScaleMxml(scale, clef);
@@ -126,15 +124,43 @@ function writeScaleVexFlow(scale, clef) {
     renderer: { elementId: 'vexFlow_output', width: 500, height: 200 },
   });
 
+
   const score = vf.EasyScore();
   const system = vf.System();
   clef = clef.toLowerCase();
 
+  //offset to # or b
+  function offsetSymbol(offset) {
+    var symbol = ''
+    if (offset === -1) {
+      symbol = 'b'
+    }
+    else if (offset === 1) {
+      symbol = '#'
+    }
+    return symbol
+  }
+
+
+  // Notes populator
+  var firstNote = scale[0]
+  var scoreNotes = `${firstNote.letter}${offsetSymbol(firstNote.offset)}${firstNote.octave}/8, `
+
+  for (let i = 1; i < scale.length; i++) {
+    let note = scale[i];
+    if (scale.indexOf(note) !== scale.length) {
+      scoreNotes += note.letter + offsetSymbol(note.offset) + note.octave + ', '
+    }
+    else (scoreNotes += note.letter + offsetSymbol(note.offset) + note.octave)
+
+  }
+  scoreNotes += firstNote.letter + offsetSymbol(firstNote.offset) + (firstNote.octave + 1)
+
   system
     .addStave({
       voices: [
-        score.voice(score.notes('C#5/q, B4, A4, G#4', { stem: 'up' })),
-        score.voice(score.notes('C#4/h, C#4', { stem: 'down' })),
+        score.voice(score.notes(scoreNotes, { stem: 'up' }))
+        // score.voice(score.notes('C#4/h, C#4', { stem: 'down' })),
 
       ],
     })
