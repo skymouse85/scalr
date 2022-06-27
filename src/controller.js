@@ -14,6 +14,7 @@ function onReady() {
     var quality = $("#quality").val()
     var clef = $("#clef").val()
     var scale = Scalr.getScale(noteVal, noteoffset, quality)
+    console.log(clef.toLowerCase())
     console.log(scale)
 
     writeScaleDomList(scale);
@@ -37,7 +38,6 @@ function onReady() {
       } else if (note.offset === -1) {
         text += '♭'
       }
-      //// work on basic text output for accidentals - if note.offset  ===  flat {note.offset = b} ect...
 
       text += ' ';
       var $li = $('<li></li>') // li is a jquery object
@@ -128,6 +128,7 @@ function writeScaleVexFlow(scale, clef) {
 
   const score = vf.EasyScore();
   const system = vf.System();
+  clef = clef.toLowerCase();
 
   system
     .addStave({
@@ -137,7 +138,8 @@ function writeScaleVexFlow(scale, clef) {
 
       ],
     })
-    .addClef('treble')
+
+    .addClef(clef)
     .addTimeSignature('4/4');
 
   vf.draw();
