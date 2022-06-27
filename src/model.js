@@ -306,7 +306,7 @@ window.Scalr = {};
             { step: 3, offset: 1, octave: 4 },
             { step: 4, offset: 0, octave: 4 },
             { step: 5, offset: 0, octave: 4 },
-            { step: 4, offset: 0, octave: 4 },
+            { step: 6, offset: 0, octave: 4 },
             { step: 0, offset: 0, octave: 5 },
             { step: 1, offset: 0, octave: 5 },
         ],
