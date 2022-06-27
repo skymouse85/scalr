@@ -75,7 +75,7 @@ function onReady() {
             </pitch>
             <duration>1</duration>
             <type>quarter</type>
-            <accidental>${Scalr.getAccidental(note.offset)}</accidental>
+            <accidental>${note.accidental}</accidental>
         </note>\n`
     }
 
@@ -134,6 +134,7 @@ function writeScaleVexFlow(scale, clef) {
       voices: [
         score.voice(score.notes('C#5/q, B4, A4, G#4', { stem: 'up' })),
         score.voice(score.notes('C#4/h, C#4', { stem: 'down' })),
+
       ],
     })
     .addClef('treble')

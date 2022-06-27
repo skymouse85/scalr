@@ -75,6 +75,9 @@ window.Scalr = {};
         get letter() {
             return LETTERS[this.step]
         }
+        get accidental() {
+            return ACCIDENTS[this.offset]
+        }
         copy() {
             // this will return an INSTANCE of the class, in this case 'Note'
             return new Note(this.step, this.offset, this.octave)
@@ -227,122 +230,124 @@ window.Scalr = {};
     var minor = {
 
         'Anatural': [
-            { step: 5, offset: 0 },
-            { step: 6, offset: 0 },
-            { step: 0, offset: 0 },
-            { step: 1, offset: 0 },
-            { step: 2, offset: 0 },
-            { step: 3, offset: 0 },
-            { step: 4, offset: 0 },
+            { step: 5, offset: 0, octave: 3 },
+            { step: 6, offset: 0, octave: 3 },
+            { step: 0, offset: 0, octave: 4 },
+            { step: 1, offset: 0, octave: 4 },
+            { step: 2, offset: 0, octave: 4 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
         ],
         'Bflat': [
-            { step: 6, offset: -1 },
-            { step: 0, offset: 0 },
-            { step: 1, offset: -1 },
-            { step: 2, offset: -1 },
-            { step: 3, offset: 0 },
-            { step: 4, offset: -1 },
-            { step: 5, offset: -1 },
+            { step: 6, offset: -1, octave: 3 },
+            { step: 0, offset: 0, octave: 4 },
+            { step: 1, offset: -1, octave: 4 },
+            { step: 2, offset: -1, octave: 4 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: -1, octave: 4 },
+            { step: 5, offset: -1, octave: 4 },
         ],
         'Bnatural': [
-            { step: 6, offset: 0 },
-            { step: 0, offset: 1 },
-            { step: 1, offset: 0 },
-            { step: 2, offset: 0 },
-            { step: 3, offset: 1 },
-            { step: 4, offset: 0 },
-            { step: 5, offset: 0 },
+            { step: 6, offset: 0, octave: 3 },
+            { step: 0, offset: 1, octave: 4 },
+            { step: 1, offset: 0, octave: 4 },
+            { step: 2, offset: 0, octave: 4 },
+            { step: 3, offset: 1, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
         ],
         'Cnatural': [
-            { step: 0, offset: 0 },
-            { step: 1, offset: 0 },
-            { step: 2, offset: -1 },
-            { step: 3, offset: 0 },
-            { step: 4, offset: 0 },
-            { step: 5, offset: -1 },
-            { step: 6, offset: -1 },
+            { step: 0, offset: 0, octave: 4 },
+            { step: 1, offset: 0, octave: 4 },
+            { step: 2, offset: -1, octave: 4 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: -1, octave: 4 },
+            { step: 6, offset: -1, octave: 4 },
         ],
         'Csharp': [
-            { step: 0, offset: 1 },
-            { step: 1, offset: 1 },
-            { step: 2, offset: 0 },
-            { step: 3, offset: 1 },
-            { step: 4, offset: 1 },
-            { step: 5, offset: 0 },
-            { step: 6, offset: 0 },
+            { step: 0, offset: 1, octave: 4 },
+            { step: 1, offset: 1, octave: 4 },
+            { step: 2, offset: 0, octave: 4 },
+            { step: 3, offset: 1, octave: 4 },
+            { step: 4, offset: 1, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
+            { step: 6, offset: 0, octave: 4 },
         ],
         'Dnatural': [
-            { step: 1, offset: 0 },
-            { step: 2, offset: 0 },
-            { step: 3, offset: 0 },
-            { step: 4, offset: 0 },
-            { step: 5, offset: 0 },
-            { step: 6, offset: -1 },
-            { step: 0, offset: 0 },
+            { step: 1, offset: 0, octave: 4 },
+            { step: 2, offset: 0, octave: 4 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
+            { step: 6, offset: -1, octave: 4 },
+            { step: 0, offset: 0, octave: 5 },
         ],
         'Dsharp': [
-            { step: 1, offset: 1 },
-            { step: 2, offset: 1 },
-            { step: 3, offset: 1 },
-            { step: 4, offset: 1 },
-            { step: 5, offset: 1 },
-            { step: 6, offset: 0 },
-            { step: 0, offset: 1 },
+            { step: 1, offset: 1, octave: 4 },
+            { step: 2, offset: 1, octave: 4 },
+            { step: 3, offset: 1, octave: 4 },
+            { step: 4, offset: 1, octave: 4 },
+            { step: 5, offset: 1, octave: 4 },
+            { step: 6, offset: 0, octave: 4 },
+            { step: 0, offset: 1, octave: 5 },
         ],
         'Eflat': [
-            { step: 2, offset: -1 },
-            { step: 3, offset: 0 },
-            { step: 4, offset: -1 },
-            { step: 5, offset: -1 },
-            { step: 6, offset: -1 },
-            { step: 0, offset: -1 },
-            { step: 1, offset: -1 },
+            { step: 2, offset: -1, octave: 4 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: -1, octave: 4 },
+            { step: 5, offset: -1, octave: 4 },
+            { step: 6, offset: -1, octave: 4 },
+            { step: 0, offset: -1, octave: 5 },
+            { step: 1, offset: -1, octave: 5 },
         ],
         'Enatural': [
-            { step: 2, offset: 0 },
-            { step: 3, offset: 1 },
-            { step: 4, offset: 0 },
-            { step: 5, offset: 0 },
-            { step: 4, offset: 0 },
-            { step: 0, offset: 0 },
-            { step: 1, offset: 0 },
+            { step: 2, offset: 0, octave: 4 },
+            { step: 3, offset: 1, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 0, offset: 0, octave: 5 },
+            { step: 1, offset: 0, octave: 5 },
         ],
         'Fnatural': [
-            { step: 3, offset: 0 },
-            { step: 4, offset: 0 },
-            { step: 5, offset: -1 },
-            { step: 6, offset: -1 },
-            { step: 0, offset: 0 },
-            { step: 1, offset: -1 },
-            { step: 2, offset: -1 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: -1, octave: 4 },
+            { step: 6, offset: -1, octave: 4 },
+            { step: 0, offset: 0, octave: 5 },
+            { step: 1, offset: -1, octave: 5 },
+            { step: 2, offset: -1, octave: 5 },
         ],
         'Fsharp': [
-            { step: 3, offset: 1 },
-            { step: 4, offset: 1 },
-            { step: 5, offset: 0 },
-            { step: 6, offset: 0 },
-            { step: 0, offset: 1 },
-            { step: 1, offset: 0 },
-            { step: 2, offset: 0 },
+            { step: 3, offset: 1, octave: 4 },
+            { step: 4, offset: 1, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
+            { step: 6, offset: 0, octave: 4 },
+            { step: 0, offset: 1, octave: 5 },
+            { step: 1, offset: 0, octave: 5 },
+            { step: 2, offset: 0, octave: 5 },
         ],
         'Gnatural': [
-            { step: 4, offset: 0 },
-            { step: 5, offset: 0 },
-            { step: 6, offset: -1 },
-            { step: 0, offset: 0 },
-            { step: 1, offset: 0 },
-            { step: 2, offset: -1 },
-            { step: 3, offset: 0 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
+            { step: 6, offset: -1, octave: 4 },
+            { step: 0, offset: 0, octave: 5 },
+            { step: 1, offset: 0, octave: 5 },
+            { step: 2, offset: -1, octave: 5 },
+            { step: 3, offset: 0, octave: 5 },
         ],
         'Gsharp': [
-            { step: 4, offset: 1 },
-            { step: 5, offset: 1 },
-            { step: 6, offset: 0 },
-            { step: 0, offset: 1 },
-            { step: 1, offset: 1 },
-            { step: 2, offset: 0 },
-            { step: 3, offset: 1 },
+            { step: 4, offset: 1, octave: 4 },
+            { step: 5, offset: 1, octave: 4 },
+            { step: 6, offset: 0, octave: 4 },
+            { step: 0, offset: 1, octave: 5 },
+            { step: 1, offset: 1, octave: 5 },
+            { step: 2, offset: 0, octave: 5 },
+            { step: 3, offset: 1, octave: 5 },
         ],
+    }
+    var diminished = {
     }
 
     function copyScale(scaleArr) {
@@ -356,8 +361,6 @@ window.Scalr = {};
         return scaleCopy;
     }
 
-    var diminished = {
-    }
     //harmonic minor handler
     /**
      * 
@@ -430,11 +433,7 @@ window.Scalr = {};
         // use if statement to popint to object from quality input
     }
 
-    //TODO move to Note class (getter for accidental)
     //TODO anything that takes a note, move to note class
-    Scalr.getAccidental = function (offset) {
-        return ACCIDENTS[offset]
-    }
 
     //XML specific functions
 
