@@ -30,7 +30,7 @@ function onReady() {
       // for each note in scale...
       var text = "";
       var note = scale[i];
-      text += Scalr.getLetter(note.step);
+      text += note.letter;
       text += ' '
       if (note.offset === 1) {
         text += '♯'
@@ -70,7 +70,7 @@ function onReady() {
           <note>
             <pitch>
               <alter>${note.offset}</alter>
-              <step>${Scalr.getLetter(note.step)}</step>
+              <step>${note.letter}</step>
               <octave>${Scalr.getRange(clef, note)}</octave>
             </pitch>
             <duration>1</duration>

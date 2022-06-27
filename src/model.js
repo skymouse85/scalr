@@ -41,142 +41,187 @@ window.Scalr = {};
 
     }
 
+    //prototype
+    // const NoteProto = {
+    //     getLetter: function getLetter() {
+    //         return LETTERS[this.step]
+    //     },
+    //     copy: function () {
+    //         //...
+    //     }
+    // }
+
+    // what goes on underneath when a class is created
+    // function Note(step, offset, octave) {
+    //     this.step = step
+    //     this.offset = offset
+    //     this.octave = octave
+    // }
+    // Note.prototype.getLetter = function () {
+    //     return LETTERS[this.step]
+    // }
+    // Note.prototype.copy = function () {
+    //     //...
+    // }
+    //TODO move to Note class (getter for accidental)
+    class Note {
+        //does not require to write the keyword 'function'
+        constructor(step, offset, octave) {
+            this.step = step
+            this.offset = offset
+            this.octave = octave
+        }
+        // getter for letter (note.letter)
+        get letter() {
+            return LETTERS[this.step]
+        }
+        copy() {
+            // this will return an INSTANCE of the class, in this case 'Note'
+            return new Note(this.step, this.offset, this.octave)
+        }
+    }
+
+
+    // it's a convention that prototypes start with a capital letter ex: var AnimalProto = {speak: function() {return 'ruff'}}
+
+    // call is a method that can control what object  the 'this' keyword will refer to - the first arg is what the 'this' will refer to
+
     var major = {
         'Cnatural': [
-            { step: 0, offset: 0, trebleRange: 4 },
-            { step: 1, offset: 0, trebleRange: 4 },
-            { step: 2, offset: 0, trebleRange: 4 },
-            { step: 3, offset: 0, trebleRange: 4 },
-            { step: 4, offset: 0, trebleRange: 4 },
-            { step: 5, offset: 0, trebleRange: 4 },
-            { step: 6, offset: 0, trebleRange: 4 },
+            { step: 0, offset: 0, octave: 4 },
+            { step: 1, offset: 0, octave: 4 },
+            { step: 2, offset: 0, octave: 4 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
+            { step: 6, offset: 0, octave: 4 },
         ],
         'Csharp': [
-            { step: 0, offset: 1, trebleRange: 4 },
-            { step: 1, offset: 1, trebleRange: 4 },
-            { step: 2, offset: 1, trebleRange: 4 },
-            { step: 3, offset: 1, trebleRange: 4 },
-            { step: 4, offset: 1, trebleRange: 4 },
-            { step: 5, offset: 1, trebleRange: 4 },
-            { step: 6, offset: 1, trebleRange: 5 },
+            { step: 0, offset: 1, octave: 4 },
+            { step: 1, offset: 1, octave: 4 },
+            { step: 2, offset: 1, octave: 4 },
+            { step: 3, offset: 1, octave: 4 },
+            { step: 4, offset: 1, octave: 4 },
+            { step: 5, offset: 1, octave: 4 },
+            { step: 6, offset: 1, octave: 5 },
         ],
         'Dflat': [
-            { step: 1, offset: -1, trebleRange: 4 },
-            { step: 2, offset: -1, trebleRange: 4 },
-            { step: 3, offset: 0, trebleRange: 4 },
-            { step: 4, offset: 0, trebleRange: 4 },
-            { step: 5, offset: -1, trebleRange: 4 },
-            { step: 6, offset: -1, trebleRange: 4 },
-            { step: 0, offset: 0, trebleRange: 5 },
+            { step: 1, offset: -1, octave: 4 },
+            { step: 2, offset: -1, octave: 4 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: -1, octave: 4 },
+            { step: 6, offset: -1, octave: 4 },
+            { step: 0, offset: 0, octave: 5 },
         ],
         'Dnatural': [
-            { step: 1, offset: 0, trebleRange: 4 },
-            { step: 2, offset: 0, trebleRange: 4 },
-            { step: 3, offset: 1, trebleRange: 4 },
-            { step: 4, offset: 0, trebleRange: 4 },
-            { step: 5, offset: 0, trebleRange: 4 },
-            { step: 6, offset: 0, trebleRange: 4 },
-            { step: 0, offset: 1, trebleRange: 5 },
+            { step: 1, offset: 0, octave: 4 },
+            { step: 2, offset: 0, octave: 4 },
+            { step: 3, offset: 1, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
+            { step: 6, offset: 0, octave: 4 },
+            { step: 0, offset: 1, octave: 5 },
         ],
         'Eflat': [
-            { step: 2, offset: -1, trebleRange: 4 },
-            { step: 3, offset: 0, trebleRange: 4 },
-            { step: 4, offset: 0, trebleRange: 4 },
-            { step: 5, offset: -1, trebleRange: 4 },
-            { step: 6, offset: -1, trebleRange: 4 },
-            { step: 0, offset: 0, trebleRange: 5 },
-            { step: 1, offset: 0, trebleRange: 5 },
+            { step: 2, offset: -1, octave: 4 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: -1, octave: 4 },
+            { step: 6, offset: -1, octave: 4 },
+            { step: 0, offset: 0, octave: 5 },
+            { step: 1, offset: 0, octave: 5 },
         ],
         'Enatural': [
-            { step: 2, offset: 0, trebleRange: 4 },
-            { step: 3, offset: 1, trebleRange: 4 },
-            { step: 4, offset: 1, trebleRange: 4 },
-            { step: 5, offset: 0, trebleRange: 4 },
-            { step: 6, offset: 0, trebleRange: 4 },
-            { step: 0, offset: 1, trebleRange: 5 },
-            { step: 1, offset: 1, trebleRange: 5 },
+            { step: 2, offset: 0, octave: 4 },
+            { step: 3, offset: 1, octave: 4 },
+            { step: 4, offset: 1, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
+            { step: 6, offset: 0, octave: 4 },
+            { step: 0, offset: 1, octave: 5 },
+            { step: 1, offset: 1, octave: 5 },
         ],
         'Fnatural': [
-            { step: 3, offset: 0, trebleRange: 4 },
-            { step: 4, offset: 0, trebleRange: 4 },
-            { step: 5, offset: 0, trebleRange: 4 },
-            { step: 6, offset: -1, trebleRange: 4 },
-            { step: 0, offset: 0, trebleRange: 5 },
-            { step: 1, offset: 0, trebleRange: 5 },
-            { step: 2, offset: 0, trebleRange: 5 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
+            { step: 6, offset: -1, octave: 4 },
+            { step: 0, offset: 0, octave: 5 },
+            { step: 1, offset: 0, octave: 5 },
+            { step: 2, offset: 0, octave: 5 },
         ],
         'Fsharp': [
-            { step: 3, offset: 1, trebleRange: 4 },
-            { step: 4, offset: 1, trebleRange: 4 },
-            { step: 5, offset: 1, trebleRange: 4 },
-            { step: 6, offset: 0, trebleRange: 4 },
-            { step: 0, offset: 1, trebleRange: 5 },
-            { step: 1, offset: 1, trebleRange: 5 },
-            { step: 2, offset: 1, trebleRange: 5 },
+            { step: 3, offset: 1, octave: 4 },
+            { step: 4, offset: 1, octave: 4 },
+            { step: 5, offset: 1, octave: 4 },
+            { step: 6, offset: 0, octave: 4 },
+            { step: 0, offset: 1, octave: 5 },
+            { step: 1, offset: 1, octave: 5 },
+            { step: 2, offset: 1, octave: 5 },
         ],
         'Gflat': [
-            { step: 4, offset: -1, trebleRange: 4 },
-            { step: 5, offset: -1, trebleRange: 4 },
-            { step: 6, offset: -1, trebleRange: 4 },
-            { step: 0, offset: -1, trebleRange: 5 },
-            { step: 1, offset: -1, trebleRange: 5 },
-            { step: 2, offset: -1, trebleRange: 5 },
-            { step: 3, offset: 0, trebleRange: 5 },
+            { step: 4, offset: -1, octave: 4 },
+            { step: 5, offset: -1, octave: 4 },
+            { step: 6, offset: -1, octave: 4 },
+            { step: 0, offset: -1, octave: 5 },
+            { step: 1, offset: -1, octave: 5 },
+            { step: 2, offset: -1, octave: 5 },
+            { step: 3, offset: 0, octave: 5 },
         ],
         'Gnatural': [
-            { step: 4, offset: 0, trebleRange: 4 },
-            { step: 5, offset: 0, trebleRange: 4 },
-            { step: 6, offset: 0, trebleRange: 4 },
-            { step: 0, offset: 0, trebleRange: 5 },
-            { step: 1, offset: 0, trebleRange: 5 },
-            { step: 2, offset: 0, trebleRange: 5 },
-            { step: 3, offset: 1, trebleRange: 5 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
+            { step: 6, offset: 0, octave: 4 },
+            { step: 0, offset: 0, octave: 5 },
+            { step: 1, offset: 0, octave: 5 },
+            { step: 2, offset: 0, octave: 5 },
+            { step: 3, offset: 1, octave: 5 },
         ],
         'Aflat': [
-            { step: 5, offset: -1, trebleRange: 3 },
-            { step: 6, offset: -1, trebleRange: 3 },
-            { step: 0, offset: 0, trebleRange: 4 },
-            { step: 1, offset: -1, trebleRange: 4 },
-            { step: 2, offset: -1, trebleRange: 4 },
-            { step: 3, offset: 0, trebleRange: 4 },
-            { step: 4, offset: 0, trebleRange: 4 },
+            { step: 5, offset: -1, octave: 3 },
+            { step: 6, offset: -1, octave: 3 },
+            { step: 0, offset: 0, octave: 4 },
+            { step: 1, offset: -1, octave: 4 },
+            { step: 2, offset: -1, octave: 4 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
         ],
 
         'Anatural': [
-            { step: 5, offset: 0, trebleRange: 3 },
-            { step: 6, offset: 0, trebleRange: 3 },
-            { step: 0, offset: 1, trebleRange: 4 },
-            { step: 1, offset: 0, trebleRange: 4 },
-            { step: 2, offset: 0, trebleRange: 4 },
-            { step: 3, offset: 1, trebleRange: 4 },
-            { step: 4, offset: 1, trebleRange: 4 },
+            { step: 5, offset: 0, octave: 3 },
+            { step: 6, offset: 0, octave: 3 },
+            { step: 0, offset: 1, octave: 4 },
+            { step: 1, offset: 0, octave: 4 },
+            { step: 2, offset: 0, octave: 4 },
+            { step: 3, offset: 1, octave: 4 },
+            { step: 4, offset: 1, octave: 4 },
         ],
         'Bflat': [
-            { step: 6, offset: -1, trebleRange: 3 },
-            { step: 0, offset: 0, trebleRange: 4 },
-            { step: 1, offset: 0, trebleRange: 4 },
-            { step: 2, offset: -1, trebleRange: 4 },
-            { step: 3, offset: 0, trebleRange: 4 },
-            { step: 4, offset: 0, trebleRange: 4 },
-            { step: 5, offset: 0, trebleRange: 4 },
+            { step: 6, offset: -1, octave: 3 },
+            { step: 0, offset: 0, octave: 4 },
+            { step: 1, offset: 0, octave: 4 },
+            { step: 2, offset: -1, octave: 4 },
+            { step: 3, offset: 0, octave: 4 },
+            { step: 4, offset: 0, octave: 4 },
+            { step: 5, offset: 0, octave: 4 },
         ],
         'Bnatural': [
-            { step: 6, offset: 0, trebleRange: 3 },
-            { step: 0, offset: 1, trebleRange: 4 },
-            { step: 1, offset: 1, trebleRange: 4 },
-            { step: 2, offset: 0, trebleRange: 4 },
-            { step: 3, offset: 1, trebleRange: 4 },
-            { step: 4, offset: 1, trebleRange: 4 },
-            { step: 5, offset: 1, trebleRange: 4 },
+            { step: 6, offset: 0, octave: 3 },
+            { step: 0, offset: 1, octave: 4 },
+            { step: 1, offset: 1, octave: 4 },
+            { step: 2, offset: 0, octave: 4 },
+            { step: 3, offset: 1, octave: 4 },
+            { step: 4, offset: 1, octave: 4 },
+            { step: 5, offset: 1, octave: 4 },
         ],
         'Cflat': [
-            { step: 0, offset: -1, trebleRange: 4 },
-            { step: 1, offset: -1, trebleRange: 4 },
-            { step: 2, offset: -1, trebleRange: 4 },
-            { step: 3, offset: -1, trebleRange: 4 },
-            { step: 4, offset: -1, trebleRange: 4 },
-            { step: 5, offset: -1, trebleRange: 4 },
-            { step: 6, offset: -1, trebleRange: 4 },
+            { step: 0, offset: -1, octave: 4 },
+            { step: 1, offset: -1, octave: 4 },
+            { step: 2, offset: -1, octave: 4 },
+            { step: 3, offset: -1, octave: 4 },
+            { step: 4, offset: -1, octave: 4 },
+            { step: 5, offset: -1, octave: 4 },
+            { step: 6, offset: -1, octave: 4 },
         ]
     }
 
@@ -304,7 +349,10 @@ window.Scalr = {};
     function copyScale(scaleArr) {
         var scaleCopy = [];
         for (var i = 0; i < scaleArr.length; i++) {
-            scaleCopy.push({ ...scaleArr[i] });
+            var note = scaleArr[i]
+            //ensure instance of note
+            note = new Note(note.step, note.offset, note.octave)
+            scaleCopy.push(note);
         }
         return scaleCopy;
     }
@@ -334,7 +382,7 @@ window.Scalr = {};
         scale = copyScale(scale);
         var descend = []
         for (let j = scale.length - 2; j > -1; j--) {
-            descend.push({ ...scale[j] });
+            descend.push(scale[j]);
         }
         return descend;
     }
@@ -383,9 +431,7 @@ window.Scalr = {};
         // use if statement to popint to object from quality input
     }
 
-    Scalr.getLetter = function (step) {
-        return LETTERS[step]
-    }
+    //TODO move to Note class (getter for accidental)
     Scalr.getAccidental = function (offset) {
         return ACCIDENTS[offset]
     }
@@ -401,10 +447,10 @@ window.Scalr = {};
 
     Scalr.getRange = function (clef, note) {
         if (clef === 'Treble') {
-            return note.trebleRange
+            return note.octave
         }
         else if (clef === 'Bass') {
-            return note.trebleRange - 1
+            return note.octave - 1
         }
     }
 
