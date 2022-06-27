@@ -81,7 +81,6 @@ window.Scalr = {};
         }
     }
 
-
     // it's a convention that prototypes start with a capital letter ex: var AnimalProto = {speak: function() {return 'ruff'}}
 
     // call is a method that can control what object  the 'this' keyword will refer to - the first arg is what the 'this' will refer to
@@ -432,6 +431,7 @@ window.Scalr = {};
     }
 
     //TODO move to Note class (getter for accidental)
+    //TODO anything that takes a note, move to note class
     Scalr.getAccidental = function (offset) {
         return ACCIDENTS[offset]
     }
@@ -445,7 +445,7 @@ window.Scalr = {};
      * @returns  proper note range for ascending scale
      */
 
-    Scalr.getRange = function (clef, note) {
+    Scalr.getOctaveForClef = function (clef, note) {
         if (clef === 'Treble') {
             return note.octave
         }
