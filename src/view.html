@@ -4,8 +4,10 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vexflow@4.0.3/build/cjs/vexflow.js"></script>
     <script src="model.js"></script>
     <script src="controller.js"></script>
+
 </head>
 
 <body>
@@ -49,16 +51,14 @@
         </form>
     </div>
     <div id="output">
-        <h2>MusicXml</h2>
         <ul id="scale_output"></ul>
+        <h2>vexFlow</h2>
+        <div id="vexFlow_output"></div>
+        <h2>MusicXml</h2>
+        <!-- precode formats code for output -->
         <pre><code id="xml_output"></code></pre>
     </div>
 
-
-    <div id="flowOutput">
-        <pre><code id="vexFlow_output"></code></pre>
-
-    </div>
 
 </body>
 
