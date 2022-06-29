@@ -55,63 +55,6 @@ function onReady() {
   //Treble clef
   // UP C4 - A4
   // DOWN B4 - B7  
-
-  function writeScaleMxml(scale, clef) {
-
-    // if clef === treble and root is not a,b --> root octave = 4
-
-    var notesXml = ``
-    for (let i = 0; i < scale.length; i++) {
-
-      let note = scale[i]
-      notesXml += `
-          <note>
-            <pitch>
-              <alter>${note.offset}</alter>
-              <step>${note.letter}</step>
-              <octave>${Scalr.getOctaveForClef(clef, note)}</octave>
-            </pitch>
-            <duration>1</duration>
-            <type>quarter</type>
-            <accidental>${note.accidental}</accidental>
-        </note>\n`
-    }
-
-    var output = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE score-partwise PUBLIC
-    "-//Recordare//DTD MusicXML 4.0 Partwise//EN"
-    "http://www.musicxml.org/dtds/partwise.dtd">
-<score-partwise version="4.0">
-  <part-list>
-    <score-part id="P1">
-      <part-name>vibraphone</part-name>
-    </score-part>
-  </part-list>
-  <part id="P1">
-    <measure number="1">
-      <attributes>
-        <divisions>1</divisions>
-        <key>
-          <fifths>0</fifths>
-        </key>
-        <time>
-          <beats>${scale.length}</beats>
-          <beat-type>4</beat-type>
-        </time>
-        <clef>
-          <sign>${Scalr.clefSign(clef)}</sign>
-          <line>${Scalr.clefLine(clef)}</line>
-        </clef>
-      </attributes>
-      ${notesXml}
-    </measure>
-  </part>
-</score-partwise>`
-
-    $('#xml_output').text(output)
-  }
-
-
 }
 
 
@@ -171,3 +114,59 @@ function writeScaleVexFlow(scale, clef) {
   vf.draw();
 
 }
+
+
+
+// if clef === treble and root is not a,b --> root octave = 4
+function writeScaleMxml(scale, clef) {
+  var notesXml = ``
+  for (let i = 0; i < scale.length; i++) {
+
+    let note = scale[i]
+    notesXml += `
+          <note>
+            <pitch>
+              <alter>${note.offset}</alter>
+              <step>${note.letter}</step>
+              <octave>${Scalr.getOctaveForClef(clef, note)}</octave>
+            </pitch>
+            <duration>1</duration>
+            <type>quarter</type>
+            <accidental>${note.accidental}</accidental>
+        </note>\n`
+  }
+
+  var output = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE score-partwise PUBLIC
+    "-//Recordare//DTD MusicXML 4.0 Partwise//EN"
+    "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="4.0">
+  <part-list>
+    <score-part id="P1">
+      <part-name>vibraphone</part-name>
+    </score-part>
+  </part-list>
+  <part id="P1">
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+        <key>
+          <fifths>0</fifths>
+        </key>
+        <time>
+          <beats>${scale.length}</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>${Scalr.clefSign(clef)}</sign>
+          <line>${Scalr.clefLine(clef)}</line>
+        </clef>
+      </attributes>
+      ${notesXml}
+    </measure>
+  </part>
+</score-partwise>`
+
+  $('#xml_output').text(output)
+}
+
