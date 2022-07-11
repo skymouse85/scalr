@@ -58,7 +58,7 @@ function onReady() {
 }
 
 
-
+// easyScore API
 function writeScaleVexFlow(scale, clef) {
 
   const { Factory, EasyScore, System } = Vex.Flow;
@@ -86,6 +86,7 @@ function writeScaleVexFlow(scale, clef) {
 
 
   // Notes populator
+  //todo decide if the current beaming is acceptable. If not, generate notes in groups of two and beam accordingly
   var firstNote = scale[0]
   var scoreNotes = `${firstNote.letter}${offsetSymbol(firstNote.offset)}${firstNote.octave}/8, `
 
@@ -102,7 +103,9 @@ function writeScaleVexFlow(scale, clef) {
   system
     .addStave({
       voices: [
-        score.voice(score.notes(scoreNotes, { stem: 'up' }))
+        score.voice(
+          score.beam(
+            score.notes(scoreNotes, { stem: 'up' })))
         // score.voice(score.notes('C#4/h, C#4', { stem: 'down' })),
 
       ],
