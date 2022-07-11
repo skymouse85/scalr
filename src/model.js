@@ -84,6 +84,12 @@ window.Scalr = {};
         }
     }
 
+    class Scale {
+        constructor(root, tonality) {
+            this.root = root
+            this.tonality = tonality
+        }
+    }
     // it's a convention that prototypes start with a capital letter ex: var AnimalProto = {speak: function() {return 'ruff'}}
 
     // call is a method that can control what object  the 'this' keyword will refer to - the first arg is what the 'this' will refer to
