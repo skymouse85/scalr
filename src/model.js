@@ -433,15 +433,6 @@ window.Scalr = {};
 
         var noteName = noteVal + noteoffset;
         var notes
-        if (quality === 'major') {
-            notes = copyNotes(major[noteName]);
-        } else if (quality === 'natural minor') {
-            notes = copyNotes(minor[noteName]);
-        } else if (quality === 'harmonic minor') {
-            notes = harmonic(minor[noteName]);
-        } else if (quality === 'melodic minor') {
-            notes = melodic(minor[noteName]);
-        }
 
         switch (quality) {
             case 'major':
@@ -458,10 +449,21 @@ window.Scalr = {};
                 break;
             default:
                 throw new Error('not a valid scale type!')
+
         }
 
 
         return new Scale(notes, tonality)
+
+        // if (quality === 'major') {
+        //     notes = copyNotes(major[noteName]);
+        // } else if (quality === 'natural minor') {
+        //     notes = copyNotes(minor[noteName]);
+        // } else if (quality === 'harmonic minor') {
+        //     notes = harmonic(minor[noteName]);
+        // } else if (quality === 'melodic minor') {
+        //     notes = melodic(minor[noteName]);
+        // }
 
 
     }
@@ -480,10 +482,10 @@ window.Scalr = {};
 
     Scalr.getOctaveForClef = function (clef, note) {
         if (clef === 'Treble') {
-            return note.octave
+            return Scale.note.octave
         }
         else if (clef === 'Bass') {
-            return note.octave - 1
+            return Scale.note.octave - 1
         }
     }
 
