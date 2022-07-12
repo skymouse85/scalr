@@ -38,14 +38,16 @@ window.Scalr = {};
 
     //* Note Class
     /**
-     * {scale{[]}} step
-     * {scale{[]}} offset
-     * {scale{[]}}octave
-     * returns new instance of note class(step, offset, octave)
+     * Represents a note
      */
-    class Note {
 
-        //does not require to write the keyword 'function'
+    class Note {
+        /**
+        * @param {integer} step
+        * @param {integer} offset
+        * @param {integer} octave
+        */
+
         constructor(step, offset, octave) {
             this.step = step
             this.offset = offset
@@ -58,6 +60,9 @@ window.Scalr = {};
         get accidental() {
             return ACCIDENTS[this.offset]
         }
+        /**
+         * @returns {Note} New Note instance
+         */
         copy() {
             // this will return an INSTANCE of the class, in this case 'Note'
             return new Note(this.step, this.offset, this.octave)
@@ -66,17 +71,29 @@ window.Scalr = {};
 
     //*Scale class
     /**
-        * @param {Note[]} notes
-        * @param {string} tonality 
-        */
+     * represents a scale
+     */
     class Scale {
+        /**
+         * 
+         * @param {Note[]} notes 
+         * @param {string} tonality 
+         */
         constructor(notes, tonality) {
             this.notes = notes
             this.tonality = tonality
         }
+        //TODO look up how to document getters in VS code
+        /**
+         * @return {Note}
+         */
         get root() {
             return this.notes[0]
         }
+        /**
+         * 
+         * @returns {Scale}
+         */
         copy() {
             return new Scale(this.notes, this.tonality)
         }
@@ -423,10 +440,10 @@ window.Scalr = {};
     //*Scalr.getScale
     /**
      * 
-     * @param {*} noteVal 
-     * @param {*} noteoffset 
-     * @param {*} quality 
-     * @returns new Scale class instance
+     * @param {string} noteVal 
+     * @param {string} noteoffset 
+     * @param {string} quality 
+     * @returns {Scale} new Scale instance
      */
 
     Scalr.getScale = function (noteVal, noteoffset, quality) {
@@ -453,7 +470,7 @@ window.Scalr = {};
         }
 
 
-        return new Scale(notes, tonality)
+        return new Scale(notes, quality)
 
         // if (quality === 'major') {
         //     notes = copyNotes(major[noteName]);
