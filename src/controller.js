@@ -25,10 +25,11 @@ function onReady() {
   function writeScaleDomList(scale) {
     var $ul = $("#scale_output") // 
     $ul.empty();
-    for (let i = 0; i < scale.length; i++) {
+    var notes = scale.notes
+    for (let i = 0; i < notes.length; i++) {
       // for each note in scale...
       var text = "";
-      var note = scale[i];
+      var note = notes[i];
       text += note.letter;
       text += ' '
       if (note.offset === 1) {
@@ -87,12 +88,13 @@ function writeScaleVexFlow(scale, clef) {
 
   // Notes populator
   //todo decide if the current beaming is acceptable. If not, generate notes in groups of two and beam accordingly
-  var firstNote = scale[0]
+  var notes = scale.notes
+  var firstNote = notes[0]
   var scoreNotes = `${firstNote.letter}${offsetSymbol(firstNote.offset)}${firstNote.octave}/8, `
 
-  for (let i = 1; i < scale.length; i++) {
-    let note = scale[i];
-    if (scale.indexOf(note) !== scale.length) {
+  for (let i = 1; i < notes.length; i++) {
+    let note = notes[i];
+    if (notes.indexOf(note) !== notes.length) {
       scoreNotes += note.letter + offsetSymbol(note.offset) + note.octave + ', '
     }
     else (scoreNotes += note.letter + offsetSymbol(note.offset) + note.octave)
@@ -125,7 +127,7 @@ function writeScaleMxml(scale, clef) {
   var notesXml = ``
   for (let i = 0; i < scale.length; i++) {
 
-    let note = scale[i]
+    let note = scale.notes[i]
     notesXml += `
           <note>
             <pitch>
