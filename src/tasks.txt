@@ -1,0 +1,6 @@
+add doc comments to functions and clean up
+refactor get scale to return a Scale instance
+add doc comment to getScale - all params and return
+refactor controller to use Scale.notes
+
+ look at how to use a switch statement instead of else if
