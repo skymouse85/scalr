@@ -36,7 +36,13 @@ window.Scalr = {};
     }
 
 
-
+    //* Note Class
+    /**
+     * {scale{[]}} step
+     * {scale{[]}} offset
+     * {scale{[]}}octave
+     * returns new instance of note class(step, offset, octave)
+     */
     class Note {
 
         //does not require to write the keyword 'function'
@@ -58,6 +64,7 @@ window.Scalr = {};
         }
     }
 
+    //*Scale class
     /**
         * @param {Note[]} notes
         * @param {string} tonality 
@@ -334,8 +341,10 @@ window.Scalr = {};
             { step: 3, offset: 1, octave: 5 },
         ],
     }
-    var diminished = {
-    }
+    // var diminished = {
+    // }
+
+    //*copyNotes
     /**
      * 
      * @param {object[]} array of note properties objects or note objects
@@ -411,7 +420,7 @@ window.Scalr = {};
         return ascend.concat(descend);
     }
 
-
+    //*Scalr.getScale
     /**
      * 
      * @param {*} noteVal 
@@ -441,13 +450,14 @@ window.Scalr = {};
 
     //TODO anything that takes a note, move to note class
 
-    //XML specific functions
+    //*XML specific functions
 
+    //*Scalr.getOctaveForClef
     /**
      * 
      * @param {string} clef 
      * @param {string} note 
-     * @returns{integer}proper note range for ascending scale
+     * @returns{integer} proper note range for ascending scale
      */
 
     Scalr.getOctaveForClef = function (clef, note) {
@@ -459,10 +469,12 @@ window.Scalr = {};
         }
     }
 
+
+    //*Scalr.clefSign
     /**
      * 
      * @param {string} clef 
-     * @returns XML code for clef sign
+     * @returns {string} indicates which clef sign to use in musicXML
      */
     Scalr.clefSign = function (clef) {
         if (clef === 'Treble') {
@@ -472,10 +484,12 @@ window.Scalr = {};
             return CLEFS.Bass[0].sign;
         }
     }
+
+    //*Scalr.clefLine
     /**
      * 
      * @param {string} clef 
-     * @returns XML code for clef line
+     * @returns {integer} indicates which clef line to use in musicXML
      */
     Scalr.clefLine = function (clef) {
         if (clef === 'Treble') {
@@ -490,9 +504,7 @@ window.Scalr = {};
 
     //todo work on scale name output as part of scale object and Scaler.getScale based on tonality input
     //todo write test to check each note name and get all scales and prints any that are missing
-    //* from Bach WTC key centers - 
-    //* CM/m, C#M/m(four sharps), DM/m, EbM/D#m(6 sharps), EM/m, FM/m, F#M/m, GM/m, AbM/G#m(5 sharps), AM/m, BbM/m(5 flats), BM/m
-    //* i'll still include Eb minor, GbMajor, Cb Major, Db major
+
     function scaleCheck(majorScaleObj, minorScaleObj) {
         var scaleRef = {
             major: 5,
