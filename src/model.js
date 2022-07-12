@@ -3,12 +3,6 @@ window.Scalr = {};
 // ♮♯♭
 
 (function () {
-    /**
-     * these scale centers are based on the tonalities found in J.S. Bach's Well Tempered Clavier as well as the modern circle of fiths (https://en.wikipedia.org/wiki/Circle_of_fifths) Major scales are organized chromatically starting with C, and minors are organized chormatically starting with A (as Bach did in WTC), including relevant enharmonic equvalents.
-     */
-
-    //* all chromatic majors and minors are accounted for as is 'correct'
-
     //! offset to offset, natural = 0, sharp = 1, flat = -1
     //! drop the top octave note
     //! note hashmap, add in view if desired
@@ -41,28 +35,7 @@ window.Scalr = {};
 
     }
 
-    //prototype
-    // const NoteProto = {
-    //     getLetter: function getLetter() {
-    //         return LETTERS[this.step]
-    //     },
-    //     copy: function () {
-    //         //...
-    //     }
-    // }
 
-    // what goes on underneath when a class is created
-    // function Note(step, offset, octave) {
-    //     this.step = step
-    //     this.offset = offset
-    //     this.octave = octave
-    // }
-    // Note.prototype.getLetter = function () {
-    //     return LETTERS[this.step]
-    // }
-    // Note.prototype.copy = function () {
-    //     //...
-    // }
     //TODO move to Note class (getter for accidental)
     class Note {
         //does not require to write the keyword 'function'
@@ -85,9 +58,19 @@ window.Scalr = {};
     }
 
     class Scale {
-        constructor(root, tonality) {
-            this.root = root
+        /**
+         * @param {Note[]} notes
+         * @param {string} tonality 
+         */
+        constructor(notes, tonality) {
+            this.notes = notes
             this.tonality = tonality
+        }
+        get root() {
+            return this.notes[0]
+        }
+        copy() {
+            return new Scale(this.notes, this.tonality)
         }
     }
     // it's a convention that prototypes start with a capital letter ex: var AnimalProto = {speak: function() {return 'ruff'}}
@@ -355,8 +338,12 @@ window.Scalr = {};
     }
     var diminished = {
     }
-
-    function copyScale(scaleArr) {
+    /**
+     * 
+     * @param {object[]} array of note properties objects or note objects
+     * @returns {Note[]} array of Note objects
+     */
+    function copyNotes(scaleArr) {
         var scaleCopy = [];
         for (var i = 0; i < scaleArr.length; i++) {
             var note = scaleArr[i]
@@ -424,19 +411,31 @@ window.Scalr = {};
     }
 
     // opts hashmap
+    /**
+     * 
+     * @param {*} noteVal 
+     * @param {*} noteoffset 
+     * @param {*} quality 
+     * @returns 
+     */
 
     Scalr.getScale = function (noteVal, noteoffset, quality) {
+
         var noteName = noteVal + noteoffset;
+        var notes
         if (quality === 'major') {
-            return copyScale(major[noteName]);
-        } if (quality === 'natural minor') {
-            return copyScale(minor[noteName]);
-        } if (quality === 'harmonic minor') {
-            return harmonic(minor[noteName]);
-        } if (quality === 'melodic minor') {
-            return melodic(minor[noteName]);
+            notes = copyNotes(major[noteName]);
+        } else if (quality === 'natural minor') {
+            notes = copyNotes(minor[noteName]);
+        } else if (quality === 'harmonic minor') {
+            notes = harmonic(minor[noteName]);
+        } else if (quality === 'melodic minor') {
+            notes = melodic(minor[noteName]);
         }
-        // use if statement to popint to object from quality input
+
+        //todo look at how to use a switch statement instead of else if
+        return new Scale(notes, tonality)
+
     }
 
     //TODO anything that takes a note, move to note class
@@ -445,9 +444,9 @@ window.Scalr = {};
 
     /**
      * 
-     * @param {user defined} clef 
-     * @param {} note 
-     * @returns  proper note range for ascending scale
+     * @param {string} clef 
+     * @param {string} note 
+     * @returns  {integer}proper note range for ascending scale
      */
 
     Scalr.getOctaveForClef = function (clef, note) {
