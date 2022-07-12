@@ -36,8 +36,9 @@ window.Scalr = {};
     }
 
 
-    //TODO move to Note class (getter for accidental)
+
     class Note {
+
         //does not require to write the keyword 'function'
         constructor(step, offset, octave) {
             this.step = step
@@ -57,11 +58,11 @@ window.Scalr = {};
         }
     }
 
+    /**
+        * @param {Note[]} notes
+        * @param {string} tonality 
+        */
     class Scale {
-        /**
-         * @param {Note[]} notes
-         * @param {string} tonality 
-         */
         constructor(notes, tonality) {
             this.notes = notes
             this.tonality = tonality
@@ -73,9 +74,6 @@ window.Scalr = {};
             return new Scale(this.notes, this.tonality)
         }
     }
-    // it's a convention that prototypes start with a capital letter ex: var AnimalProto = {speak: function() {return 'ruff'}}
-
-    // call is a method that can control what object  the 'this' keyword will refer to - the first arg is what the 'this' will refer to
 
     var major = {
         'Cnatural': [
@@ -371,8 +369,11 @@ window.Scalr = {};
     }
 
     //*descender
-    // takes in a scale and returns a shallow copy of a scale plus all notes in reverse starting at the leading tone
-
+    /**
+     * 
+     * @param {array} scale 
+     * @returns shallow copy of scale array with all notes reversed starting at the leading tone
+     */
     function descender(scale) {
         scale = copyScale(scale);
         var descend = []
@@ -381,7 +382,7 @@ window.Scalr = {};
         }
         return descend;
     }
-    // console.log(descender(minor['Bflat']));
+
 
     //*melodic minor handler
     /**
@@ -410,13 +411,13 @@ window.Scalr = {};
         return ascend.concat(descend);
     }
 
-    // opts hashmap
+
     /**
      * 
      * @param {*} noteVal 
      * @param {*} noteoffset 
      * @param {*} quality 
-     * @returns 
+     * @returns new Scale class instance
      */
 
     Scalr.getScale = function (noteVal, noteoffset, quality) {
@@ -446,7 +447,7 @@ window.Scalr = {};
      * 
      * @param {string} clef 
      * @param {string} note 
-     * @returns  {integer}proper note range for ascending scale
+     * @returns{integer}proper note range for ascending scale
      */
 
     Scalr.getOctaveForClef = function (clef, note) {
@@ -460,7 +461,7 @@ window.Scalr = {};
 
     /**
      * 
-     * @param {*} clef 
+     * @param {string} clef 
      * @returns XML code for clef sign
      */
     Scalr.clefSign = function (clef) {
@@ -473,7 +474,7 @@ window.Scalr = {};
     }
     /**
      * 
-     * @param {*} clef 
+     * @param {string} clef 
      * @returns XML code for clef line
      */
     Scalr.clefLine = function (clef) {
