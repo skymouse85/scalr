@@ -443,8 +443,26 @@ window.Scalr = {};
             notes = melodic(minor[noteName]);
         }
 
-        //todo look at how to use a switch statement instead of else if
+        switch (quality) {
+            case 'major':
+                notes = copyNotes(major[noteName])
+                break;
+            case 'natural minor':
+                notes = copyNotes(minor[noteName])
+                break;
+            case 'harmonic minor':
+                notes = harmonic(minor[noteName])
+                break;
+            case 'melodic minor':
+                notes = melodic(minor[noteName])
+                break;
+            default:
+                throw new Error('not a valid scale type!')
+        }
+
+
         return new Scale(notes, tonality)
+
 
     }
 
