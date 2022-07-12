@@ -1,3 +1,6 @@
+// it's a convention that prototypes start with a capital letter ex: var AnimalProto = {speak: function() {return 'ruff'}}
+// call is a method that can control what object  the 'this' keyword will refer to - the first arg is what the 'this' will refer to
+
 prototype
 const NoteProto = {
     getLetter: function getLetter() {
@@ -8,7 +11,9 @@ const NoteProto = {
     }
 }
 
-    what goes on underneath when a class is created
+// what goes on underneath when a class is created
+
+
 function Note(step, offset, octave) {
     this.step = step
     this.offset = offset
