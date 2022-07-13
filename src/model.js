@@ -385,7 +385,7 @@ window.Scalr = {};
      * @return {array} a copy of the natural minor with a raised 7th scale degree.
      */
     function harmonic(scale) {
-        scale = copyScale(scale)
+        scale = copyNotes(scale)
         if (scale[6].offset === -1) {
             scale[6].offset = 0
         } else if (scale[6].offset === 0) {
@@ -401,7 +401,7 @@ window.Scalr = {};
      * @returns shallow copy of scale array with all notes reversed starting at the leading tone
      */
     function descender(scale) {
-        scale = copyScale(scale);
+        scale = copyNotes(scale);
         var descend = []
         for (let j = scale.length - 2; j > -1; j--) {
             descend.push(scale[j]);
@@ -419,7 +419,7 @@ window.Scalr = {};
 
     function melodic(scale) {
         //copy scale as ascend
-        var ascend = copyScale(scale);
+        var ascend = copyNotes(scale);
         // raise 6th and 7th scale degrees
         if (ascend[5].offset === -1) {
             ascend[5].offset = 0
@@ -469,19 +469,7 @@ window.Scalr = {};
 
         }
 
-
         return new Scale(notes, quality)
-
-        // if (quality === 'major') {
-        //     notes = copyNotes(major[noteName]);
-        // } else if (quality === 'natural minor') {
-        //     notes = copyNotes(minor[noteName]);
-        // } else if (quality === 'harmonic minor') {
-        //     notes = harmonic(minor[noteName]);
-        // } else if (quality === 'melodic minor') {
-        //     notes = melodic(minor[noteName]);
-        // }
-
 
     }
 
@@ -498,11 +486,12 @@ window.Scalr = {};
      */
 
     Scalr.getOctaveForClef = function (clef, note) {
+        note = new Note(note.step, note.offset, note.octave)
         if (clef === 'Treble') {
-            return Scale.note.octave
+            return note.octave
         }
         else if (clef === 'Bass') {
-            return Scale.note.octave - 1
+            return note.octave - 1
         }
     }
 
@@ -524,7 +513,6 @@ window.Scalr = {};
 
     //*Scalr.clefLine
     /**
-     * 
      * @param {string} clef 
      * @returns {integer} indicates which clef line to use in musicXML
      */

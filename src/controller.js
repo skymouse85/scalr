@@ -125,9 +125,10 @@ function writeScaleVexFlow(scale, clef) {
 // if clef === treble and root is not a,b --> root octave = 4
 function writeScaleMxml(scale, clef) {
   var notesXml = ``
-  for (let i = 0; i < scale.length; i++) {
+  var notes = scale.notes
+  for (let i = 0; i < notes.length; i++) {
 
-    let note = scale.notes[i]
+    let note = notes[i]
     notesXml += `
           <note>
             <pitch>
@@ -159,7 +160,7 @@ function writeScaleMxml(scale, clef) {
           <fifths>0</fifths>
         </key>
         <time>
-          <beats>${scale.length}</beats>
+          <beats>${notes.length}</beats>
           <beat-type>4</beat-type>
         </time>
         <clef>
