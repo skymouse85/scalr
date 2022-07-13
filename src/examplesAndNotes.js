@@ -25,3 +25,6 @@ Note.prototype.getLetter = function () {
 Note.prototype.copy = function () {
     //...
 }
+
+
+
