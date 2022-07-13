@@ -1,4 +1,13 @@
+h1 {
+    color: #F38993;
+    font-family: Arial, Helvetica, sans-serif, bold;
+}
+
+
+
 #xml_output {
     white-space: pre;
     font-family: courier;
+
+
 }
