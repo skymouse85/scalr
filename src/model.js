@@ -21,15 +21,6 @@ const ACCIDENTS = {
     '0': 'natural',
     '1': 'sharp'
 }
-const CLEFS = {
-    Treble: [
-        { sign: 'G', line: 2 }
-    ],
-    Bass: [
-        { sign: 'F', line: 4 }
-    ]
-}
-
 
 /**
  * Represents a note
@@ -64,6 +55,8 @@ class Note {
         // this will return an INSTANCE of the class, in this case 'Note'
         return new Note(this.step, this.offset, this.octave)
     }
+
+
 }
 
 /**
@@ -88,13 +81,6 @@ class Scale {
         return this.notes[0]
     }
 
-    /**
-     * 
-     * @returns {Scale}
-     */
-    copy() {
-        return new Scale(this.notes, this.tonality)
-    }
 }
 
 /**
@@ -204,49 +190,11 @@ export function getScale(noteVal, noteoffset, quality) {
 
 //TODO anything that takes a note, move to note class
 
-//*XML specific functions
-/**
- * 
- * @param {string} clef 
- * @param {string} note 
- * @returns {Number} proper note range for ascending scale
- */
 
-export function getOctaveForClef(clef, note) {
-    note = new Note(note.step, note.offset, note.octave)
-    if (clef === 'Treble') {
-        return note.octave
-    }
-    else if (clef === 'Bass') {
-        return note.octave - 1
-    }
-}
 
-/**
- * @param {string} clef 
- * @returns {string} indicates which clef sign to use in musicXML
- */
-export function clefSign(clef) {
-    if (clef === 'Treble') {
-        return CLEFS.Treble[0].sign;
-    }
-    else if (clef === 'Bass') {
-        return CLEFS.Bass[0].sign;
-    }
-}
 
-/**
- * @param {string} clef 
- * @returns {Number} indicates which clef line to use in musicXML
- */
-export function clefLine(clef) {
-    if (clef === 'Treble') {
-        return CLEFS.Treble[0].line;
-    }
-    else if (clef === 'Bass') {
-        return CLEFS.Bass[0].line;
-    }
-}
+
+
 
 
 const MAJOR = {

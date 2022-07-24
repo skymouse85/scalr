@@ -62,7 +62,10 @@ function writeScaleDomList(scale) {
 
 // easyScore API
 function writeScaleVexFlow(scale, clef) {
-
+    const Clefs = {
+        "G": 'treble',
+        "F": 'bass'
+    }
     const { Factory, EasyScore, System } = Vex.Flow;
 
     const vf = new Factory({
@@ -72,7 +75,6 @@ function writeScaleVexFlow(scale, clef) {
 
     const score = vf.EasyScore();
     const system = vf.System();
-    clef = clef.toLowerCase();
 
     //offset to # or b
     function offsetSymbol(offset) {
@@ -114,7 +116,7 @@ function writeScaleVexFlow(scale, clef) {
             ],
         })
 
-        .addClef(clef)
+        .addClef(Clefs[clef])
         .addTimeSignature('4/4');
 
     vf.draw();
@@ -125,6 +127,10 @@ function writeScaleVexFlow(scale, clef) {
 
 // if clef === treble and root is not a,b --> root octave = 4
 function writeScaleMxml(scale, clef) {
+    const clefLines = {
+        "G": 2,
+        "F": 4
+    }
     var notesXml = ``
     var notes = scale.notes
     for (let i = 0; i < notes.length; i++) {
@@ -135,7 +141,7 @@ function writeScaleMxml(scale, clef) {
             <pitch>
               <alter>${note.offset}</alter>
               <step>${note.letter}</step>
-              <octave>${Scalr.getOctaveForClef(clef, note)}</octave>
+              <octave>${note.octave}</octave>
             </pitch>
             <duration>1</duration>
             <type>quarter</type>
@@ -165,8 +171,8 @@ function writeScaleMxml(scale, clef) {
           <beat-type>4</beat-type>
         </time>
         <clef>
-          <sign>${Scalr.clefSign(clef)}</sign>
-          <line>${Scalr.clefLine(clef)}</line>
+          <sign>${clef}</sign>
+          <line>${clefLines[clef]}</line>
         </clef>
       </attributes>
       ${notesXml}
