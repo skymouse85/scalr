@@ -20,33 +20,45 @@
         <form id="inpform">
             <!--note input-->
             <select id="note">
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
-                <option>D</option>
-                <option>E</option>
-                <option>F</option>
-                <option>G</option>
+                <option value="0">C</option>
+                <option value="1">D</option>
+                <option value="2">E</option>
+                <option value="3">F</option>
+                <option value="4">G</option>
+                <option value="5">A</option>
+                <option value="6">B</option>
             </select>
             <!--offset input-->
             <select id="offset">
-                <option value="natural">♮</option>
-                <option value="sharp">♯</option>
-                <option value="flat">♭</option>
+                <option value="-1">♯</option>
+                <option value="0" selected>♮</option>
+                <option value="1">♭</option>
             </select>
-            <!--quality inputs-->
-            <select id="quality">
-                <option>major</option>
-                <option>natural minor</option>
-                <option>harmonic minor</option>
-                <option>melodic minor</option>
-                <option>diminished</option>
-                <option>augmented</option>
+            <!--tonality inputs-->
+            <select id="tonality">
+                <option value="1">major</option>
+                <option value="2">natural minor</option>
+                <option value="3">harmonic minor</option>
+                <option value="4">melodic minor</option>
+                <!-- <option>diminished</option> -->
+                <!-- <option>augmented</option> -->
                 <!--make minor sub form -->
+            </select>
+            <select id="direction">
+                <option value="1">ascend</option>
+                <option value="2">descend</option>
             </select>
             <select id="clef">
                 <option value="G">Treble</option>
                 <option value="F">Bass</option>
+            </select>
+            <label for="octave">Octave</label>
+            <select id="octave">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
             </select>
             <input id="generate" type="submit">
         </form>

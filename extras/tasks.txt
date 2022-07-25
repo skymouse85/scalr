@@ -1,7 +1,5 @@
-✔︎ refactor controller to use Scale.notes
-✔︎ add doc comments to functions and clean up
-✔️ refactor get scale to return a Scale instance
-✔️ add doc comment to getScale - all params and return
-✔️ look at how to use a switch statement instead of else if and implement on Sclar.getScale
+make the domList a table that reads out all values (step, offset, octave)
+add Ascending_Descending as octave option
 
+fix vex flow
 

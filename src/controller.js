@@ -9,11 +9,13 @@ function onReady() {
         event.preventDefault(); //prevents from submitting and reloading page
         // need to clear on submit
 
-        var noteVal = $("#note").val()
-        var noteoffset = $("#offset").val()
-        var quality = $("#quality").val()
+        var step = $("#note").val()
+        var offset = $("#offset").val()
+        var tonality = $("#tonality").val()
         var clef = $("#clef").val()
-        var scale = Scalr.getScale(noteVal, noteoffset, quality)
+        var direction = $("#direction").val()
+        var octave = $("#octave").val()
+        var scale = Scalr.getScale(step, offset, tonality, { 'direction': direction, 'octave': octave })
 
         writeScaleDomList(scale);
         writeScaleMxml(scale, clef);
@@ -103,7 +105,7 @@ function writeScaleVexFlow(scale, clef) {
         else (scoreNotes += note.letter + offsetSymbol(note.offset) + note.octave)
 
     }
-    scoreNotes += firstNote.letter + offsetSymbol(firstNote.offset) + (firstNote.octave + 1)
+    // scoreNotes += firstNote.letter + offsetSymbol(firstNote.offset) + (firstNote.octave + 1)
 
     system
         .addStave({

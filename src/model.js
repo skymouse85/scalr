@@ -22,6 +22,19 @@ const ACCIDENTS = {
     '1': 'sharp'
 }
 
+const TONALITY = {
+    MAJOR: 1,
+    NATURAL_MINOR: 2,
+    HARMONIC_MINOR: 3,
+    MELODIC_MINOR: 4,
+}
+
+const DIRECTION = {
+    ASCEND: 1,
+    DESCEND: 2,
+    // ASCEND_DESCEND: 3
+}
+
 /**
  * Represents a note
  */
@@ -114,27 +127,12 @@ function harmonic(scale) {
     return scale;
 }
 
-/**
- * 
- * @param {array} scale 
- * @returns shallow copy of scale array with all notes reversed starting at the leading tone
- */
-function descender(scale) {
-    scale = copyNotes(scale);
-    var descend = []
-    for (let j = scale.length - 2; j > -1; j--) {
-        descend.push(scale[j]);
-    }
-    return descend;
-}
-
 /** 
  * melodic minor handler
  * 
  * @param {array} naturalMinorScale 
  * @returns {array} copy of the scale that has the raised 6th and 7th degree ascending, and descends as a natural minor
  */
-
 function melodic(scale) {
     //copy scale as ascend
     var ascend = copyNotes(scale);
@@ -149,46 +147,61 @@ function melodic(scale) {
     } else if (ascend[6].offset === 0) {
         ascend[6].offset = 1
     };
+    return ascend;
     // make a descend var that runs scale through descender
-    var descend = descender(scale);
+    // var descend = descender(scale);
     //concat and return ascend and descend
-    return ascend.concat(descend);
+    // return ascend.concat(descend);
 }
 
 /**
- * @param {string} noteVal 
- * @param {string} noteoffset 
- * @param {string} quality 
+ * @param {Number} step 
+ * @param {Number} offset 
+ * @param {Number} tonality 
+ * @param {Object} opts
+ * @param {Number} opts.direction
+ * @param {Number} opts.octave
  * @returns {Scale} new Scale instance
  */
-export function getScale(noteVal, noteoffset, quality) {
-
-    var noteName = noteVal + noteoffset;
+export function getScale(step, offset, tonality, opts) {
+    tonality = Number(tonality);
+    opts = opts || {};
+    const direction = Number(opts.direction || DIRECTION.ASCEND);
+    const octave = Number(opts.octave || 4);
+    const key = LETTERS[step] + ACCIDENTS[offset];
+    /** @type {Note[]} */
     var notes
-
-    switch (quality) {
-        case 'major':
-            notes = copyNotes(MAJOR[noteName])
+    if (tonality === TONALITY.MELODIC_MINOR && direction === DIRECTION.DESCEND) {
+        tonality = TONALITY.NATURAL_MINOR
+    }
+    switch (tonality) {
+        case TONALITY.MAJOR:
+            notes = copyNotes(MAJOR[key])
             break;
-        case 'natural minor':
-            notes = copyNotes(MINOR[noteName])
+        case TONALITY.NATURAL_MINOR:
+            notes = copyNotes(MINOR[key])
             break;
-        case 'harmonic minor':
-            notes = harmonic(MINOR[noteName])
+        case TONALITY.HARMONIC_MINOR:
+            notes = harmonic(MINOR[key])
             break;
-        case 'melodic minor':
-            notes = melodic(MINOR[noteName])
+        case TONALITY.MELODIC_MINOR:
+            notes = melodic(MINOR[key])
             break;
         default:
             throw new Error('not a valid scale type!')
 
     }
+    var tonic = notes[0];
+    notes.push(new Note(tonic.step, tonic.offset, tonic.octave + 1));
+    notes.forEach(note => note.octave += octave);
+    if (direction === DIRECTION.DESCEND) {
+        notes.reverse();
+    }
 
-    return new Scale(notes, quality)
+    return new Scale(notes, tonality);
 
 }
 
-//TODO anything that takes a note, move to note class
 
 
 
@@ -199,261 +212,261 @@ export function getScale(noteVal, noteoffset, quality) {
 
 const MAJOR = {
     'Cnatural': [
-        { step: 0, offset: 0, octave: 4 },
-        { step: 1, offset: 0, octave: 4 },
-        { step: 2, offset: 0, octave: 4 },
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
-        { step: 6, offset: 0, octave: 4 },
+        { step: 0, offset: 0, octave: 0 },
+        { step: 1, offset: 0, octave: 0 },
+        { step: 2, offset: 0, octave: 0 },
+        { step: 3, offset: 0, octave: 0 },
+        { step: 4, offset: 0, octave: 0 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
     ],
     'Csharp': [
-        { step: 0, offset: 1, octave: 4 },
-        { step: 1, offset: 1, octave: 4 },
-        { step: 2, offset: 1, octave: 4 },
-        { step: 3, offset: 1, octave: 4 },
-        { step: 4, offset: 1, octave: 4 },
-        { step: 5, offset: 1, octave: 4 },
-        { step: 6, offset: 1, octave: 5 },
+        { step: 0, offset: 1, octave: 0 },
+        { step: 1, offset: 1, octave: 0 },
+        { step: 2, offset: 1, octave: 0 },
+        { step: 3, offset: 1, octave: 0 },
+        { step: 4, offset: 1, octave: 0 },
+        { step: 5, offset: 1, octave: 0 },
+        { step: 6, offset: 1, octave: 1 },
     ],
     'Dflat': [
-        { step: 1, offset: -1, octave: 4 },
-        { step: 2, offset: -1, octave: 4 },
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: -1, octave: 4 },
-        { step: 6, offset: -1, octave: 4 },
-        { step: 0, offset: 0, octave: 5 },
+        { step: 1, offset: -1, octave: 0 },
+        { step: 2, offset: -1, octave: 0 },
+        { step: 3, offset: 0, octave: 0 },
+        { step: 4, offset: 0, octave: 0 },
+        { step: 5, offset: -1, octave: 0 },
+        { step: 6, offset: -1, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
     ],
     'Dnatural': [
-        { step: 1, offset: 0, octave: 4 },
-        { step: 2, offset: 0, octave: 4 },
-        { step: 3, offset: 1, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
-        { step: 6, offset: 0, octave: 4 },
-        { step: 0, offset: 1, octave: 5 },
+        { step: 1, offset: 0, octave: 0 },
+        { step: 2, offset: 0, octave: 0 },
+        { step: 3, offset: 1, octave: 0 },
+        { step: 4, offset: 0, octave: 0 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 1, octave: 1 },
     ],
     'Eflat': [
-        { step: 2, offset: -1, octave: 4 },
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: -1, octave: 4 },
-        { step: 6, offset: -1, octave: 4 },
-        { step: 0, offset: 0, octave: 5 },
-        { step: 1, offset: 0, octave: 5 },
+        { step: 2, offset: -1, octave: 0 },
+        { step: 3, offset: 0, octave: 0 },
+        { step: 4, offset: 0, octave: 0 },
+        { step: 5, offset: -1, octave: 0 },
+        { step: 6, offset: -1, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
+        { step: 1, offset: 0, octave: 1 },
     ],
     'Enatural': [
-        { step: 2, offset: 0, octave: 4 },
-        { step: 3, offset: 1, octave: 4 },
-        { step: 4, offset: 1, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
-        { step: 6, offset: 0, octave: 4 },
-        { step: 0, offset: 1, octave: 5 },
-        { step: 1, offset: 1, octave: 5 },
+        { step: 2, offset: 0, octave: 0 },
+        { step: 3, offset: 1, octave: 0 },
+        { step: 4, offset: 1, octave: 0 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 1, octave: 1 },
+        { step: 1, offset: 1, octave: 1 },
     ],
     'Fnatural': [
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
-        { step: 6, offset: -1, octave: 4 },
-        { step: 0, offset: 0, octave: 5 },
-        { step: 1, offset: 0, octave: 5 },
-        { step: 2, offset: 0, octave: 5 },
+        { step: 3, offset: 0, octave: 0 },
+        { step: 4, offset: 0, octave: 0 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: -1, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
+        { step: 1, offset: 0, octave: 1 },
+        { step: 2, offset: 0, octave: 1 },
     ],
     'Fsharp': [
-        { step: 3, offset: 1, octave: 4 },
-        { step: 4, offset: 1, octave: 4 },
-        { step: 5, offset: 1, octave: 4 },
-        { step: 6, offset: 0, octave: 4 },
-        { step: 0, offset: 1, octave: 5 },
-        { step: 1, offset: 1, octave: 5 },
-        { step: 2, offset: 1, octave: 5 },
+        { step: 3, offset: 1, octave: 0 },
+        { step: 4, offset: 1, octave: 0 },
+        { step: 5, offset: 1, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 1, octave: 1 },
+        { step: 1, offset: 1, octave: 1 },
+        { step: 2, offset: 1, octave: 1 },
     ],
     'Gflat': [
-        { step: 4, offset: -1, octave: 4 },
-        { step: 5, offset: -1, octave: 4 },
-        { step: 6, offset: -1, octave: 4 },
-        { step: 0, offset: -1, octave: 5 },
-        { step: 1, offset: -1, octave: 5 },
-        { step: 2, offset: -1, octave: 5 },
-        { step: 3, offset: 0, octave: 5 },
+        { step: 4, offset: -1, octave: 0 },
+        { step: 5, offset: -1, octave: 0 },
+        { step: 6, offset: -1, octave: 0 },
+        { step: 0, offset: -1, octave: 1 },
+        { step: 1, offset: -1, octave: 1 },
+        { step: 2, offset: -1, octave: 1 },
+        { step: 3, offset: 0, octave: 1 },
     ],
     'Gnatural': [
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
-        { step: 6, offset: 0, octave: 4 },
-        { step: 0, offset: 0, octave: 5 },
-        { step: 1, offset: 0, octave: 5 },
-        { step: 2, offset: 0, octave: 5 },
-        { step: 3, offset: 1, octave: 5 },
+        { step: 4, offset: 0, octave: 0 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
+        { step: 1, offset: 0, octave: 1 },
+        { step: 2, offset: 0, octave: 1 },
+        { step: 3, offset: 1, octave: 1 },
     ],
     'Aflat': [
-        { step: 5, offset: -1, octave: 3 },
-        { step: 6, offset: -1, octave: 3 },
-        { step: 0, offset: 0, octave: 4 },
-        { step: 1, offset: -1, octave: 4 },
-        { step: 2, offset: -1, octave: 4 },
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
+        { step: 5, offset: -1, octave: 0 },
+        { step: 6, offset: -1, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
+        { step: 1, offset: -1, octave: 1 },
+        { step: 2, offset: -1, octave: 1 },
+        { step: 3, offset: 0, octave: 1 },
+        { step: 4, offset: 0, octave: 1 },
     ],
 
     'Anatural': [
-        { step: 5, offset: 0, octave: 3 },
-        { step: 6, offset: 0, octave: 3 },
-        { step: 0, offset: 1, octave: 4 },
-        { step: 1, offset: 0, octave: 4 },
-        { step: 2, offset: 0, octave: 4 },
-        { step: 3, offset: 1, octave: 4 },
-        { step: 4, offset: 1, octave: 4 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 1, octave: 1 },
+        { step: 1, offset: 0, octave: 1 },
+        { step: 2, offset: 0, octave: 1 },
+        { step: 3, offset: 1, octave: 1 },
+        { step: 4, offset: 1, octave: 1 },
     ],
     'Bflat': [
-        { step: 6, offset: -1, octave: 3 },
-        { step: 0, offset: 0, octave: 4 },
-        { step: 1, offset: 0, octave: 4 },
-        { step: 2, offset: -1, octave: 4 },
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
+        { step: 6, offset: -1, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
+        { step: 1, offset: 0, octave: 1 },
+        { step: 2, offset: -1, octave: 1 },
+        { step: 3, offset: 0, octave: 1 },
+        { step: 4, offset: 0, octave: 1 },
+        { step: 5, offset: 0, octave: 1 },
     ],
     'Bnatural': [
-        { step: 6, offset: 0, octave: 3 },
-        { step: 0, offset: 1, octave: 4 },
-        { step: 1, offset: 1, octave: 4 },
-        { step: 2, offset: 0, octave: 4 },
-        { step: 3, offset: 1, octave: 4 },
-        { step: 4, offset: 1, octave: 4 },
-        { step: 5, offset: 1, octave: 4 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 1, octave: 1 },
+        { step: 1, offset: 1, octave: 1 },
+        { step: 2, offset: 0, octave: 1 },
+        { step: 3, offset: 1, octave: 1 },
+        { step: 4, offset: 1, octave: 1 },
+        { step: 5, offset: 1, octave: 1 },
     ],
     'Cflat': [
-        { step: 0, offset: -1, octave: 4 },
-        { step: 1, offset: -1, octave: 4 },
-        { step: 2, offset: -1, octave: 4 },
-        { step: 3, offset: -1, octave: 4 },
-        { step: 4, offset: -1, octave: 4 },
-        { step: 5, offset: -1, octave: 4 },
-        { step: 6, offset: -1, octave: 4 },
+        { step: 0, offset: -1, octave: 0 },
+        { step: 1, offset: -1, octave: 0 },
+        { step: 2, offset: -1, octave: 0 },
+        { step: 3, offset: -1, octave: 0 },
+        { step: 4, offset: -1, octave: 0 },
+        { step: 5, offset: -1, octave: 0 },
+        { step: 6, offset: -1, octave: 0 },
     ]
 }
 
 const MINOR = {
 
     'Anatural': [
-        { step: 5, offset: 0, octave: 3 },
-        { step: 6, offset: 0, octave: 3 },
-        { step: 0, offset: 0, octave: 4 },
-        { step: 1, offset: 0, octave: 4 },
-        { step: 2, offset: 0, octave: 4 },
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
+        { step: 1, offset: 0, octave: 1 },
+        { step: 2, offset: 0, octave: 1 },
+        { step: 3, offset: 0, octave: 1 },
+        { step: 4, offset: 0, octave: 1 },
     ],
     'Bflat': [
-        { step: 6, offset: -1, octave: 3 },
-        { step: 0, offset: 0, octave: 4 },
-        { step: 1, offset: -1, octave: 4 },
-        { step: 2, offset: -1, octave: 4 },
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: -1, octave: 4 },
-        { step: 5, offset: -1, octave: 4 },
+        { step: 6, offset: -1, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
+        { step: 1, offset: -1, octave: 1 },
+        { step: 2, offset: -1, octave: 1 },
+        { step: 3, offset: 0, octave: 1 },
+        { step: 4, offset: -1, octave: 1 },
+        { step: 5, offset: -1, octave: 1 },
     ],
     'Bnatural': [
-        { step: 6, offset: 0, octave: 3 },
-        { step: 0, offset: 1, octave: 4 },
-        { step: 1, offset: 0, octave: 4 },
-        { step: 2, offset: 0, octave: 4 },
-        { step: 3, offset: 1, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 1, octave: 1 },
+        { step: 1, offset: 0, octave: 1 },
+        { step: 2, offset: 0, octave: 1 },
+        { step: 3, offset: 1, octave: 1 },
+        { step: 4, offset: 0, octave: 1 },
+        { step: 5, offset: 0, octave: 1 },
     ],
     'Cnatural': [
-        { step: 0, offset: 0, octave: 4 },
-        { step: 1, offset: 0, octave: 4 },
-        { step: 2, offset: -1, octave: 4 },
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: -1, octave: 4 },
-        { step: 6, offset: -1, octave: 4 },
+        { step: 0, offset: 0, octave: 0 },
+        { step: 1, offset: 0, octave: 0 },
+        { step: 2, offset: -1, octave: 0 },
+        { step: 3, offset: 0, octave: 0 },
+        { step: 4, offset: 0, octave: 0 },
+        { step: 5, offset: -1, octave: 0 },
+        { step: 6, offset: -1, octave: 0 },
     ],
     'Csharp': [
-        { step: 0, offset: 1, octave: 4 },
-        { step: 1, offset: 1, octave: 4 },
-        { step: 2, offset: 0, octave: 4 },
-        { step: 3, offset: 1, octave: 4 },
-        { step: 4, offset: 1, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
-        { step: 6, offset: 0, octave: 4 },
+        { step: 0, offset: 1, octave: 0 },
+        { step: 1, offset: 1, octave: 0 },
+        { step: 2, offset: 0, octave: 0 },
+        { step: 3, offset: 1, octave: 0 },
+        { step: 4, offset: 1, octave: 0 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
     ],
     'Dnatural': [
-        { step: 1, offset: 0, octave: 4 },
-        { step: 2, offset: 0, octave: 4 },
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
-        { step: 6, offset: -1, octave: 4 },
-        { step: 0, offset: 0, octave: 5 },
+        { step: 1, offset: 0, octave: 0 },
+        { step: 2, offset: 0, octave: 0 },
+        { step: 3, offset: 0, octave: 0 },
+        { step: 4, offset: 0, octave: 0 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: -1, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
     ],
     'Dsharp': [
-        { step: 1, offset: 1, octave: 4 },
-        { step: 2, offset: 1, octave: 4 },
-        { step: 3, offset: 1, octave: 4 },
-        { step: 4, offset: 1, octave: 4 },
-        { step: 5, offset: 1, octave: 4 },
-        { step: 6, offset: 0, octave: 4 },
-        { step: 0, offset: 1, octave: 5 },
+        { step: 1, offset: 1, octave: 0 },
+        { step: 2, offset: 1, octave: 0 },
+        { step: 3, offset: 1, octave: 0 },
+        { step: 4, offset: 1, octave: 0 },
+        { step: 5, offset: 1, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 1, octave: 1 },
     ],
     'Eflat': [
-        { step: 2, offset: -1, octave: 4 },
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: -1, octave: 4 },
-        { step: 5, offset: -1, octave: 4 },
-        { step: 6, offset: -1, octave: 4 },
-        { step: 0, offset: -1, octave: 5 },
-        { step: 1, offset: -1, octave: 5 },
+        { step: 2, offset: -1, octave: 0 },
+        { step: 3, offset: 0, octave: 0 },
+        { step: 4, offset: -1, octave: 0 },
+        { step: 5, offset: -1, octave: 0 },
+        { step: 6, offset: -1, octave: 0 },
+        { step: 0, offset: -1, octave: 1 },
+        { step: 1, offset: -1, octave: 1 },
     ],
     'Enatural': [
-        { step: 2, offset: 0, octave: 4 },
-        { step: 3, offset: 1, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
-        { step: 6, offset: 0, octave: 4 },
-        { step: 0, offset: 0, octave: 5 },
-        { step: 1, offset: 0, octave: 5 },
+        { step: 2, offset: 0, octave: 0 },
+        { step: 3, offset: 1, octave: 0 },
+        { step: 4, offset: 0, octave: 0 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
+        { step: 1, offset: 0, octave: 1 },
     ],
     'Fnatural': [
-        { step: 3, offset: 0, octave: 4 },
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: -1, octave: 4 },
-        { step: 6, offset: -1, octave: 4 },
-        { step: 0, offset: 0, octave: 5 },
-        { step: 1, offset: -1, octave: 5 },
-        { step: 2, offset: -1, octave: 5 },
+        { step: 3, offset: 0, octave: 0 },
+        { step: 4, offset: 0, octave: 0 },
+        { step: 5, offset: -1, octave: 0 },
+        { step: 6, offset: -1, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
+        { step: 1, offset: -1, octave: 1 },
+        { step: 2, offset: -1, octave: 1 },
     ],
     'Fsharp': [
-        { step: 3, offset: 1, octave: 4 },
-        { step: 4, offset: 1, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
-        { step: 6, offset: 0, octave: 4 },
-        { step: 0, offset: 1, octave: 5 },
-        { step: 1, offset: 0, octave: 5 },
-        { step: 2, offset: 0, octave: 5 },
+        { step: 3, offset: 1, octave: 0 },
+        { step: 4, offset: 1, octave: 0 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 1, octave: 1 },
+        { step: 1, offset: 0, octave: 1 },
+        { step: 2, offset: 0, octave: 1 },
     ],
     'Gnatural': [
-        { step: 4, offset: 0, octave: 4 },
-        { step: 5, offset: 0, octave: 4 },
-        { step: 6, offset: -1, octave: 4 },
-        { step: 0, offset: 0, octave: 5 },
-        { step: 1, offset: 0, octave: 5 },
-        { step: 2, offset: -1, octave: 5 },
-        { step: 3, offset: 0, octave: 5 },
+        { step: 4, offset: 0, octave: 0 },
+        { step: 5, offset: 0, octave: 0 },
+        { step: 6, offset: -1, octave: 0 },
+        { step: 0, offset: 0, octave: 1 },
+        { step: 1, offset: 0, octave: 1 },
+        { step: 2, offset: -1, octave: 1 },
+        { step: 3, offset: 0, octave: 1 },
     ],
     'Gsharp': [
-        { step: 4, offset: 1, octave: 4 },
-        { step: 5, offset: 1, octave: 4 },
-        { step: 6, offset: 0, octave: 4 },
-        { step: 0, offset: 1, octave: 5 },
-        { step: 1, offset: 1, octave: 5 },
-        { step: 2, offset: 0, octave: 5 },
-        { step: 3, offset: 1, octave: 5 },
+        { step: 4, offset: 1, octave: 0 },
+        { step: 5, offset: 1, octave: 0 },
+        { step: 6, offset: 0, octave: 0 },
+        { step: 0, offset: 1, octave: 1 },
+        { step: 1, offset: 1, octave: 1 },
+        { step: 2, offset: 0, octave: 1 },
+        { step: 3, offset: 1, octave: 1 },
     ],
 }
 
