@@ -20,6 +20,7 @@
         <form id="inpform">
             <!--note input-->
             <select id="note">
+                <!-- <option value="">-Tonic-</option> -->
                 <option value="0">C</option>
                 <option value="1">D</option>
                 <option value="2">E</option>
@@ -30,12 +31,13 @@
             </select>
             <!--offset input-->
             <select id="offset">
-                <option value="-1">♯</option>
+                <option value="1">♯</option>
                 <option value="0" selected>♮</option>
-                <option value="1">♭</option>
+                <option value="-1">♭</option>
             </select>
             <!--tonality inputs-->
             <select id="tonality">
+                <!-- <option value="">-Tonality-</option> -->
                 <option value="1">major</option>
                 <option value="2">natural minor</option>
                 <option value="3">harmonic minor</option>
@@ -45,15 +47,18 @@
                 <!--make minor sub form -->
             </select>
             <select id="direction">
+                <!-- <option value="">-Scale Direction-</option> -->
                 <option value="1">ascend</option>
                 <option value="2">descend</option>
             </select>
             <select id="clef">
+                <!-- <option value="">-Clef-</option> -->
                 <option value="G">Treble</option>
                 <option value="F">Bass</option>
             </select>
-            <label for="octave">Octave</label>
+
             <select id="octave">
+                <!-- <option value="">-Octave-</option> -->
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
