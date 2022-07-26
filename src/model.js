@@ -32,7 +32,7 @@ const TONALITY = {
 const DIRECTION = {
     ASCEND: 1,
     DESCEND: 2,
-    // ASCEND_DESCEND: 3
+    ASCEND_DESCEND: 3
 }
 
 /**
@@ -197,8 +197,17 @@ export function getScale(step, offset, tonality, opts) {
     if (direction === DIRECTION.DESCEND) {
         notes.reverse();
     }
+    if (direction === DIRECTION.ASCEND_DESCEND) {
 
+        var left = []
+        getScale(step, offset, tonality, { ...DIRECTION, octave })()
+
+
+        // var right = 
+
+    }
     return new Scale(notes, tonality);
+
 
 }
 

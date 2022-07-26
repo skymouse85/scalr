@@ -1,6 +1,6 @@
 make the domList a table that reads out all values (step, offset, octave)
 add Ascending_Descending as octave option
 vexflow - start to work in native API and see whwere helper functions come into play
-think about how to diminished and other tonalitys
+think about how to diminished and other tonalities
 
 
