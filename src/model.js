@@ -198,13 +198,17 @@ export function getScale(step, offset, tonality, opts) {
         notes.reverse();
     }
     if (direction === DIRECTION.ASCEND_DESCEND) {
-
-        var left = []
-        getScale(step, offset, tonality, { ...DIRECTION, octave })()
-
-
-        // var right = 
-
+        // use the notes array as the ascending scale
+        // declare a descending opts object that has a descending scale and the user octave as it's key value pairs 
+        var descOpts = { direction: DIRECTION.DESCEND, octave: octave };
+        // declare a descending scale instance by calling getScale with the user arguments and the descending opts objects
+        var descScale = getScale(step, offset, tonality, descOpts);
+        // push the descending scale notes into notes (access) 
+        // console.log(descScale.notes);
+        notes.pop();
+        for (var i = 0; i < descScale.notes.length; i++) {
+            notes.push(descScale.notes[i]);
+        }
     }
     return new Scale(notes, tonality);
 
