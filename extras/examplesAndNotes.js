@@ -28,3 +28,47 @@ Note.prototype.copy = function () {
 
 
 
+var renderer = new Vex.Flow.Renderer(canvas, Vex.Flow.Renderer.Backends.
+    CANVAS);
+
+var ctx = renderer.getContext();
+var stave = new Vex.Flow.Stave(10, 0, 750);
+stave.addClef("treble").setContext(ctx).draw();
+
+// Create the notes
+var notes = [
+
+    new Vex.Flow.StaveNote({ keys: ["c/4"], duration: "q" }),
+    new Vex.Flow.StaveNote({ keys: ["d/4"], duration: "q" }),
+    new Vex.Flow.StaveNote({ keys: ["b/4"], duration: "qr" }),
+    new Vex.Flow.StaveNote({ keys: ["c/4", "e/4", "g/4"], duration: "q" }),
+
+    // start new measure
+    new Vex.Flow.BarNote(),
+
+    new Vex.Flow.StaveNote({ keys: ["c/4"], duration: "q" }),
+    new Vex.Flow.StaveNote({ keys: ["d/4"], duration: "q" }),
+    new Vex.Flow.StaveNote({ keys: ["b/4"], duration: "qr" }),
+    new Vex.Flow.StaveNote({ keys: ["c/4", "e/4", "g/4"], duration: "q" }),
+
+];
+
+// Create a voice in 4/4
+var voice = new Vex.Flow.Voice({
+    num_beats: 4,
+    beat_value: 4,
+    resolution: Vex.Flow.RESOLUTION
+});
+
+// turn off tick counter
+voice.setStrict(false)
+
+// Add notes to voice
+voice.addTickables(notes);
+
+// Format and justify the notes to 700 pixels
+var formatter = new Vex.Flow.Formatter().
+    joinVoices([voice]).format([voice], 700);
+
+// Render voice
+voice.draw(ctx, stave);

@@ -70,8 +70,23 @@
         </form>
     </div>
     <div id="output">
-        <ul id="scale_output"></ul>
+
+        <ul id="scale_output">
+            <table id="domListTable" border=".5">
+                <tr>
+                    <th>note</th>
+                    <th>octave</th>
+                </tr>
+                <tr>
+                    <td id="ScaleNote"></td>
+                    <td id="ScaleOctave"></td>
+                </tr>
+            </table>
+        </ul>
         <h2>vexFlow</h2>
+        <h3>native api</h3>
+        <div id="vexFlow_nativeOutput"></div>
+        <h3>easyScore output</h3>
         <div id="vexFlow_output"></div>
         <h2>MusicXml</h2>
         <!-- precode formats code for output -->

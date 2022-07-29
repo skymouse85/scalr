@@ -1,3 +1,4 @@
+import { StaveNote, Voice } from "vexflow";
 import * as Scalr from "./model.js"
 // coordinate between view and model
 $(document).ready(onReady)
@@ -19,7 +20,9 @@ function onReady() {
 
         writeScaleDomList(scale);
         writeScaleMxml(scale, clef);
-        writeScaleVexFlow(scale, clef);
+        writeScaleVexFlowNative(scale, clef);
+        writeScaleEasyVex(scale, clef);
+
 
     }
 
@@ -39,20 +42,29 @@ function onReady() {
 function writeScaleDomList(scale) {
     var $ul = $("#scale_output") // 
     $ul.empty();
+
     var notes = scale.notes
     for (let i = 0; i < notes.length; i++) {
         // for each note in scale...
         var text = "";
         var note = notes[i];
         text += note.letter;
-        text += ' '
+
         if (note.offset === 1) {
             text += '♯'
         } else if (note.offset === -1) {
             text += '♭'
         }
 
-        text += ' ';
+        text += ', ';
+        text += note.octave;
+        text += ' '
+
+
+        // make a table that outputs note, offset, and octave
+        // iterate through notes and populate each row notes.letter, notes.offset, notes.octave
+
+
         var $li = $('<li></li>') // li is a jquery object
         $li.text(text);
 
@@ -62,33 +74,83 @@ function writeScaleDomList(scale) {
 
 }
 
+function writeScaleVexFlowNative(scale, clef) {
+    // vexFlow native API
+    // bolier plate for size, SVG, and to get a drawing context
 
-//vexFlow native API
-// bolier plate for size, SVG, and to get a drawing context
+    const Clefs = {
+        "G": 'treble',
+        "F": 'bass'
+    }
 
-// const { Renderer, Stave } = Vex.Flow;
+    const { Renderer, Stave } = Vex.Flow;
 
-// // Create an SVG renderer and attach it to the DIV element named "boo".
-// const div = document.getElementById("output");
-// const renderer = new Renderer(div, Renderer.Backends.SVG);
+    // Create an SVG renderer and attach it to the DIV element named "boo".
+    const div = document.getElementById("vexFlow_nativeOutput");
+    const renderer = new Renderer(div, Renderer.Backends.SVG);
 
-// // Configure the rendering context.
-// renderer.resize(500, 500);
-// const context = renderer.getContext();
+    // Configure the rendering context.
+    renderer.resize(500, 500);
+    const context = renderer.getContext();
 
-// // Create a stave of width 400 at position 10, 40 on the canvas.
-// const stave = new Stave(10, 40, 400);
+    // Create a stave of width 400 at position 10, 40 on the canvas.
+    const stave = new Stave(10, 40, 400);
 
-// // Add a clef and time signature.
-// stave.addClef("treble").addTimeSignature("4/4");
+    // Add a clef and time signature.
+    stave.addClef(Clefs[clef]).addTimeSignature("4/4");
 
-// // Connect it to the rendering context and draw!
-// stave.setContext(context).draw();
+    // Connect it to the rendering context and draw!
+    stave.setContext(context).draw();
+
+    //*add notes
+    //Create the notes
+    var noteArray = scale.notes
+    /**
+     * @param {Note[]} array of note objects
+     * @return {Number} step
+     * @return {Number} octave
+     */
+
+    function notePopulator(noteArray) {
+        const notes = [];
+        for (let i = 0; i < noteArray.length; i++) {
+            let note = noteArray[i];
+            notes.push(new StaveNote({ keys: [`${note.letter}/${note.octave}`], duration: "e" }))
+
+        }
+        // console.log(notes)
+        return notes;
+
+
+        // Create a voice in 4/4 and add above notes
+        const voice = new Voice({ num_beats: 4, beat_value: 4 });
+        voice.addTickables(notePopulator(noteArray));
+
+        // Format and justify the notes to 400 pixels.
+        new Formatter().joinVoices([voice]).format([voice], 350);
+
+        // Render voice
+        voice.draw(context, stave);
+
+
+        // const notes = [
+        //     new StaveNote({ keys: ["c/4"], duration: "e" })
+        // ]
+
+        // commit to 4/4 time and beamed 8th notes. iterate though scale while notes.length is <9 and populate the first measure
+        // if the scale length is greater than 9, create a new measure and iterate starting from the 9th element. 
+        // set rests where the scale length runs out
+
+    }
+
+}
+
+
 
 
 
 // easyScore API
-function writeScaleVexFlow(scale, clef) {
+function writeScaleEasyVex(scale, clef) {
     const Clefs = {
         "G": 'treble',
         "F": 'bass'
@@ -102,6 +164,7 @@ function writeScaleVexFlow(scale, clef) {
 
     const score = vf.EasyScore();
     const system = vf.System();
+    // tickable.shouldIgnoreTicks();
 
     //offset to # or b
     function offsetSymbol(offset) {
@@ -114,10 +177,16 @@ function writeScaleVexFlow(scale, clef) {
         }
         return symbol
     }
+    function handleTime(notes) {
+        if (notes.length <= 8) {
+            return '4/4'
+        } else if (notes.length > 8 && notes.length <= 16) {
+            return '8/4'
+        }
+    }
 
 
     // Notes populator
-    //todo decide if the current beaming is acceptable. If not, generate notes in groups of two and beam accordingly
     var notes = scale.notes
     var firstNote = notes[0]
     var scoreNotes = `${firstNote.letter}${offsetSymbol(firstNote.offset)}${firstNote.octave}/8, `
@@ -144,7 +213,8 @@ function writeScaleVexFlow(scale, clef) {
         })
 
         .addClef(Clefs[clef])
-        .addTimeSignature('4/4');
+        .addTimeSignature(handleTime(notes));
+
 
     vf.draw();
 
