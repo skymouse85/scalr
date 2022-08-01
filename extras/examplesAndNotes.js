@@ -72,3 +72,14 @@ var formatter = new Vex.Flow.Formatter().
 
 // Render voice
 voice.draw(ctx, stave);
+
+
+// handle octave diesplacement, start with default of treble clef 
+    // middle c = C4
+    // stem direction -
+    //Bass clef
+    // UP C1 - C3
+    //DOWN D3 - B3
+    //Treble clef
+    // UP C4 - A4
+    // DOWN B4 - B7  
