@@ -218,11 +218,6 @@ export function getScale(step, offset, tonality, opts) {
 
 
 
-
-
-
-
-
 const MAJOR = {
     'Cnatural': [
         { step: 0, offset: 0, octave: 0 },

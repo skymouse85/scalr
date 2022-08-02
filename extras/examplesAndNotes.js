@@ -75,11 +75,19 @@ voice.draw(ctx, stave);
 
 
 // handle octave diesplacement, start with default of treble clef 
-    // middle c = C4
-    // stem direction -
-    //Bass clef
-    // UP C1 - C3
-    //DOWN D3 - B3
-    //Treble clef
-    // UP C4 - A4
-    // DOWN B4 - B7  
+// middle c = C4
+// stem direction -
+//Bass clef
+// UP C1 - C3
+//DOWN D3 - B3
+//Treble clef
+// UP C4 - A4
+// DOWN B4 - B7  
+
+
+/*
+examples of destruing in JS
+*/
+const { StaveNote } = Vex.Flow; /* same as*/ const StaveNote = Vex.Flow.StaveNote
+
+var Note = Vex.Flow.StaveNote /* same as*/ var { StaveNote: Note }.Vex.Flow
