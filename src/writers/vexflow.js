@@ -37,18 +37,14 @@ export default class VexFlowWriter extends Base {
 
         for (let i = 0; i < noteArray.length; i++) {
             let note = noteArray[i];
-            let offset = OffsetSymbol[this.offset]
+            let offset = OffsetSymbol[note.offset]
             // console.log(note.OffsetSymbol[offset])
             let accident = offset !== 0;
-
             if (accident) {
                 notes.push(new StaveNote({ keys: [`${note.letter}${offset}$/${note.octave}`], duration: "8" })).addModifer(new Accidental(offset));
             } else {
                 notes.push(new StaveNote({ keys: [`${note.letter}$/${note.octave}`], duration: "8" }))
             }
-
-
-
         }
         return notes;
     }
