@@ -15,8 +15,9 @@ export default class VexFlowWriter extends Base {
         this.notePopulator()
         // this.accidentals()
         // this.measures()
-        this.createStaves()
         this.setupContext()
+        this.createStaves()
+
         this.createVoice()
         this.drawStaves()
         return this
@@ -58,10 +59,10 @@ export default class VexFlowWriter extends Base {
     setupContext() {
         // do stuff
         // Create an SVG renderer and attach it to the DIV element named "boo".
-        this.renderer = new Renderer($(target).get(0), Renderer.Backends.SVG);
+        this.renderer = new Renderer($(this.target).get(0), Renderer.Backends.SVG);
         // Configure the rendering context.
         this.renderer.resize(500, 500);
-        this.context = renderer.getContext();
+        this.context = this.renderer.getContext();
 
     }
 
@@ -69,10 +70,10 @@ export default class VexFlowWriter extends Base {
     createVoice() {
         // Create a voice in 4/4 and add above notes
         this.voice = new Voice({ num_beats: 4, beat_value: 4 });
-        this.voice.addTickables(notePopulator(noteArray));
+        this.voice.addTickables(this.notePopulator());
 
         // Format and justify the notes to 400 pixels.
-        new Formatter().joinVoices([voice]).format([voice], 350);
+        new Formatter().joinVoices([this.voice]).format([this.voice], 350);
 
     }
 
