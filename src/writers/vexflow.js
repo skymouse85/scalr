@@ -7,6 +7,11 @@ const Clefs = {
     "F": 'bass'
 }
 
+const OffsetSymbol = {
+
+    '1': '#',
+    '-1': 'b'
+}
 export default class VexFlowWriter extends Base {
 
     render(target) {
@@ -17,7 +22,6 @@ export default class VexFlowWriter extends Base {
         // this.measures()
         this.setupContext()
         this.createStaves()
-
         this.createVoice()
         this.drawStaves()
         return this
@@ -30,20 +34,33 @@ export default class VexFlowWriter extends Base {
     notePopulator() {
         let noteArray = this.scale.notes
         const notes = [];
+
         for (let i = 0; i < noteArray.length; i++) {
             let note = noteArray[i];
-            notes.push(new StaveNote({ keys: [`${note.letter}/${note.octave}`], duration: "8" }))
+            let offset = OffsetSymbol[this.offset]
+            // console.log(note.OffsetSymbol[offset])
+            let accident = offset !== 0;
+
+            if (accident) {
+                notes.push(new StaveNote({ keys: [`${note.letter}${offset}$/${note.octave}`], duration: "8" })).addModifer(new Accidental(offset));
+            } else {
+                notes.push(new StaveNote({ keys: [`${note.letter}$/${note.octave}`], duration: "8" }))
+            }
+
+
 
         }
         return notes;
     }
 
+    // offss
+
     // accidentals() {
-    //     // do stuff
+    //     this.accidental = new Accidental('accString')
     // }
 
     // measures() {
-    //     // do stuff
+
     // }
 
     createStaves() {
@@ -66,7 +83,6 @@ export default class VexFlowWriter extends Base {
 
     }
 
-
     createVoice() {
         // Create a voice in 4/4 and add above notes
         this.voice = new Voice({ num_beats: 4, beat_value: 4 });
@@ -80,17 +96,6 @@ export default class VexFlowWriter extends Base {
     drawStaves() {
         this.voice.draw(this.context, this.stave);
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
