@@ -8,17 +8,16 @@ const Clefs = {
 }
 
 const OffsetSymbol = {
-
+    '0': '',
     '1': '#',
     '-1': 'b'
 }
+
 export default class VexFlowWriter extends Base {
 
     render(target) {
         this.target = target;
-
         this.notePopulator()
-        this.accidentals()
         // this.measures()
         this.setupContext()
         this.createStaves()
@@ -38,22 +37,13 @@ export default class VexFlowWriter extends Base {
         for (let i = 0; i < noteArray.length; i++) {
             let note = noteArray[i];
 
-            notes.push(new StaveNote({ keys: [`${note.letter}/${note.octave}`], duration: "8" }))
+            notes.push(new StaveNote({ keys: [`${note.letter}${getAccidental(note)}/${note.octave}`], duration: "8" }))
         }
         return notes;
     }
 
 
 
-
-
-    accidentals() {
-        let offsetSymbol = OffsetSymbol[this.note.offsetSymbol]
-        if (offsetSymbol !== 0) {
-            return offsetSymbol
-        }
-
-    }
 
     // measures() {
 
@@ -93,6 +83,9 @@ export default class VexFlowWriter extends Base {
         this.voice.draw(this.context, this.stave);
     }
 
+}
+function getAccidental(note) {
+    return OffsetSymbol[note.offset]
 }
 
 export { VexFlowWriter }
