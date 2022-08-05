@@ -22,7 +22,7 @@ const ACCIDENTS = {
     '1': 'sharp'
 }
 
-const TONALITY = {
+export const TONALITY = {
     MAJOR: 1,
     NATURAL_MINOR: 2,
     HARMONIC_MINOR: 3,
@@ -234,13 +234,13 @@ const MAJOR = {
         { step: 3, offset: 1, octave: 0 },
         { step: 4, offset: 1, octave: 0 },
         { step: 5, offset: 1, octave: 0 },
-        { step: 6, offset: 1, octave: 1 },
+        { step: 6, offset: 1, octave: 0 }, // B# drops an octave
     ],
     'Dflat': [
         { step: 1, offset: -1, octave: 0 },
         { step: 2, offset: -1, octave: 0 },
         { step: 3, offset: 0, octave: 0 },
-        { step: 4, offset: 0, octave: 0 },
+        { step: 4, offset: -1, octave: 0 },
         { step: 5, offset: -1, octave: 0 },
         { step: 6, offset: -1, octave: 0 },
         { step: 0, offset: 0, octave: 1 },
