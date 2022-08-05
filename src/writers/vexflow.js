@@ -1,5 +1,5 @@
 import Base from './base.js'
-
+import { TONALITY } from '../model.js'
 const { Accidental, Renderer, Stave, Formatter, StaveNote, Voice } = Vex.Flow;
 
 const Clefs = {
@@ -44,9 +44,14 @@ export default class VexFlowWriter extends Base {
         this.height = 200;
 
     }
-
+    //TODO add fucntionality to let the user decide on key sig or accidentals
     setupKeySig() {
-        this.keySig = 'C';
+        this.keySig = this.scale.root.letter + getAccidental(this.scale.root);
+        //TODO write this as a switch statement
+        if (this.scale.tonality === TONALITY.NATURAL_MINOR) {
+            this.keySig += 'm'
+
+        }
     }
 
     applyAccidentals() {
