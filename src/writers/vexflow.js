@@ -17,12 +17,15 @@ export default class VexFlowWriter extends Base {
 
     render(target) {
         this.target = target;
+        this.setupKeySig()
         this.setupTime()
         this.createStaveNotes()
         // this.measures()
+        this.setupSize()
         this.setupContext()
         this.createStave()
         this.createVoice()
+        this.applyAccidentals()
         this.drawStave()
         return this
     }
@@ -33,9 +36,22 @@ export default class VexFlowWriter extends Base {
         this.noteDuration = 8
         this.timeSigUpper = 4
         this.timeSigLower = 4
-        this.timeSignature = `${this.timeSigUpper}/${this.timeSigLower}`
+        this.timeSig = `${this.timeSigUpper}/${this.timeSigLower}`
+    }
+    //TODO move all size numbers to setup size
+    setupSize() {
+        this.width = 500;
+        this.height = 200;
+
     }
 
+    setupKeySig() {
+        this.keySig = 'C';
+    }
+
+    applyAccidentals() {
+        Accidental.applyAccidentals([this.voice], this.keySig)
+    }
     /**
      * 
      * 
@@ -63,37 +79,42 @@ export default class VexFlowWriter extends Base {
     // }
 
     createStave() {
-        // do stuff
+
         this.stave = new Stave(10, 40, 400);
         // Add a clef and time signature.
-        this.stave.addClef(Clefs[this.clef]).addTimeSignature(this.timeSignature);
-
+        this.stave.addClef(Clefs[this.clef])
+        this.stave.addKeySignature(this.keySig)
+        this.stave.addTimeSignature(this.timeSig)
         // Connect it to the rendering context and draw!
-        this.stave.setContext(this.context).draw();
+        this.stave.setContext(this.context)//.draw()
     }
 
     setupContext() {
-        // do stuff
+        if (this.context) {
+            this.context.clear()
+        }
         // Create an SVG renderer and attach it to the DIV element named "boo".
         this.renderer = new Renderer($(this.target).get(0), Renderer.Backends.SVG);
         // Configure the rendering context.
-        this.renderer.resize(500, 500);
+        this.renderer.resize(this.width, this.height);
         this.context = this.renderer.getContext();
 
     }
 
     createVoice() {
         // Create a voice in 4/4 and add above notes
-        this.voice = new Voice({ num_beats: this.timeSigUpper, beat_value: this.timeSigLower });
+        this.voice = new Voice();
         this.voice.addTickables(this.staveNotes);
 
         // Format and justify the notes to 400 pixels.
-        new Formatter().joinVoices([this.voice]).format([this.voice], 350);
+        // new Formatter().joinVoices([this.voice]).format([this.voice], 350);
 
     }
 
     drawStave() {
-        this.voice.draw(this.context, this.stave);
+        this.stave.draw()
+        Formatter.FormatAndDraw(this.context, this.stave, this.staveNotes)
+        // this.voice.draw(this.context, this.stave);
     }
 
 }
