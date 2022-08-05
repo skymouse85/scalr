@@ -18,7 +18,7 @@ export default class VexFlowWriter extends Base {
         this.target = target;
 
         this.notePopulator()
-        // this.accidentals()
+        this.accidentals()
         // this.measures()
         this.setupContext()
         this.createStaves()
@@ -29,7 +29,7 @@ export default class VexFlowWriter extends Base {
 
     /**
      * 
-     * @returns 
+     * 
      */
     notePopulator() {
         let noteArray = this.scale.notes
@@ -37,23 +37,23 @@ export default class VexFlowWriter extends Base {
 
         for (let i = 0; i < noteArray.length; i++) {
             let note = noteArray[i];
-            let offset = OffsetSymbol[note.offset]
-            // console.log(note.OffsetSymbol[offset])
-            let accident = offset !== 0;
-            if (accident) {
-                notes.push(new StaveNote({ keys: [`${note.letter}${offset}$/${note.octave}`], duration: "8" })).addModifer(new Accidental(offset));
-            } else {
-                notes.push(new StaveNote({ keys: [`${note.letter}$/${note.octave}`], duration: "8" }))
-            }
+
+            notes.push(new StaveNote({ keys: [`${note.letter}/${note.octave}`], duration: "8" }))
         }
         return notes;
     }
 
-    // offss
 
-    // accidentals() {
-    //     this.accidental = new Accidental('accString')
-    // }
+
+
+
+    accidentals() {
+        let offsetSymbol = OffsetSymbol[this.note.offsetSymbol]
+        if (offsetSymbol !== 0) {
+            return offsetSymbol
+        }
+
+    }
 
     // measures() {
 

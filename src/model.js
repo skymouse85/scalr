@@ -69,7 +69,6 @@ class Note {
         return new Note(this.step, this.offset, this.octave)
     }
 
-
 }
 
 /**
