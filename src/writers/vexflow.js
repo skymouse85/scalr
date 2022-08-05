@@ -17,29 +17,42 @@ export default class VexFlowWriter extends Base {
 
     render(target) {
         this.target = target;
-        this.notePopulator()
+        this.setupTime()
+        this.createStaveNotes()
         // this.measures()
         this.setupContext()
-        this.createStaves()
+        this.createStave()
         this.createVoice()
-        this.drawStaves()
+        this.drawStave()
         return this
+    }
+
+    setupTime() {
+
+        //
+        this.noteDuration = 8
+        this.timeSigUpper = 4
+        this.timeSigLower = 4
+        this.timeSignature = `${this.timeSigUpper}/${this.timeSigLower}`
     }
 
     /**
      * 
      * 
      */
-    notePopulator() {
+    createStaveNotes() {
         let noteArray = this.scale.notes
-        const notes = [];
+        this.staveNotes = [];
 
         for (let i = 0; i < noteArray.length; i++) {
             let note = noteArray[i];
-
-            notes.push(new StaveNote({ keys: [`${note.letter}${getAccidental(note)}/${note.octave}`], duration: "8" }))
+            const noteLabel = `${note.letter}${getAccidental(note)}/${note.octave}`
+            this.staveNotes.push(new StaveNote({
+                keys: [noteLabel],
+                duration: this.noteDuration,
+                clef: Clefs[this.clef],
+            }))
         }
-        return notes;
     }
 
 
@@ -49,11 +62,11 @@ export default class VexFlowWriter extends Base {
 
     // }
 
-    createStaves() {
+    createStave() {
         // do stuff
         this.stave = new Stave(10, 40, 400);
         // Add a clef and time signature.
-        this.stave.addClef(Clefs[this.clef]).addTimeSignature("4/4");
+        this.stave.addClef(Clefs[this.clef]).addTimeSignature(this.timeSignature);
 
         // Connect it to the rendering context and draw!
         this.stave.setContext(this.context).draw();
@@ -71,19 +84,21 @@ export default class VexFlowWriter extends Base {
 
     createVoice() {
         // Create a voice in 4/4 and add above notes
-        this.voice = new Voice({ num_beats: 4, beat_value: 4 });
-        this.voice.addTickables(this.notePopulator());
+        this.voice = new Voice({ num_beats: this.timeSigUpper, beat_value: this.timeSigLower });
+        this.voice.addTickables(this.staveNotes);
 
         // Format and justify the notes to 400 pixels.
         new Formatter().joinVoices([this.voice]).format([this.voice], 350);
 
     }
 
-    drawStaves() {
+    drawStave() {
         this.voice.draw(this.context, this.stave);
     }
 
 }
+
+
 function getAccidental(note) {
     return OffsetSymbol[note.offset]
 }
