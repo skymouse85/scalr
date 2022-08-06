@@ -47,7 +47,7 @@ export default class VexFlowWriter extends Base {
     //TODO add fucntionality to let the user decide on key sig or accidentals
     setupKeySig() {
         this.keySig = this.scale.root.letter + getAccidental(this.scale.root);
-        //TODO write this as a switch statement
+        //TODO write this as a switch statement for all three cases of minor
         if (this.scale.tonality === TONALITY.NATURAL_MINOR) {
             this.keySig += 'm'
 
@@ -115,6 +115,7 @@ export default class VexFlowWriter extends Base {
         // new Formatter().joinVoices([this.voice]).format([this.voice], 350);
 
     }
+
 
     drawStave() {
         this.stave.draw()
