@@ -25,8 +25,8 @@ function onReady() {
 
         listWriter.reload(scale, clef).render('#list_output')
         mxmlWriter.reload(scale, clef).render('#xml_output')
-        easyVexWriter.reload(scale, clef).render($('#easyVex_output').empty())
         vexFlowWriter.reload(scale, clef).render($('#vexFlow_Output').empty())
+        // easyVexWriter.reload(scale, clef).render($('#easyVex_output').empty())
 
     }
 }
