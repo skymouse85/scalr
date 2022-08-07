@@ -1,18 +1,41 @@
 import Base from './base.js'
+
+const keyNum = {
+  "C": 0,
+  "G": 1,
+  "D": 2,
+  "A": 3,
+  "E": 4,
+  "E": 5,
+  "B": 6,
+  "F#": 7,
+  "C#": 8,
+  "F": -1,
+  "Bb": -2,
+  "Eb": -3,
+  "Ab": -4,
+  "Db": -5,
+  "Gb": -6,
+  "Cb": -7,
+
+}
 export default class MxmlWriter extends Base {
 
-    render(target) {
-        this.target = target;
-        const clefLines = {
-            "G": 2,
-            "F": 4
-        }
-        var notesXml = ``
-        var notes = this.scale.notes
-        for (let i = 0; i < notes.length; i++) {
 
-            let note = notes[i]
-            notesXml += `
+
+  render(target) {
+    this.target = target;
+
+    const clefLines = {
+      "G": 2,
+      "F": 4
+    }
+    var notesXml = ``
+    var notes = this.scale.notes
+    for (let i = 0; i < notes.length; i++) {
+
+      let note = notes[i]
+      notesXml += `
               <note>
                 <pitch>
                   <alter>${note.offset}</alter>
@@ -23,9 +46,10 @@ export default class MxmlWriter extends Base {
                 <type>quarter</type>
                 <accidental>${note.accidental}</accidental>
             </note>\n`
-        }
+    }
 
-        var output = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+    var output = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <!DOCTYPE score-partwise PUBLIC
         "-//Recordare//DTD MusicXML 4.0 Partwise//EN"
         "http://www.musicxml.org/dtds/partwise.dtd">
@@ -40,7 +64,7 @@ export default class MxmlWriter extends Base {
           <attributes>
             <divisions>1</divisions>
             <key>
-              <fifths>0</fifths>
+              <fifths>${keyNum}</fifths>
             </key>
             <time>
               <beats>${notes.length}</beats>
@@ -56,8 +80,11 @@ export default class MxmlWriter extends Base {
       </part>
     </score-partwise>`
 
-        $(target).text(output)
-    }
+    $(target).text(output)
+  }
 
 }
+
+
+
 export { MxmlWriter }
