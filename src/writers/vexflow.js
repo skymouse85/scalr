@@ -48,27 +48,15 @@ export default class VexFlowWriter extends Base {
     setupKeySig() {
         this.keySig = this.scale.root.letter + getAccidental(this.scale.root);
         //TODO refactor the switch to take this.keysig 
-        // if (this.scale.tonality === TONALITY.NATURAL_MINOR) {
 
-        //     this.keySig += 'm'
-
-        // }
+        var tonality = this.scale.tonality
         switch (tonality) {
-
-            case this.scale.tonality = TONALITY.NATURAL_MINOR:
-            case this.scale.tonality = TONALITY.HARMONIC_MINOR:
-            case this.scale.tonality = TONALITY.MELODIC_MINOR:
+            case TONALITY.NATURAL_MINOR:
+            case TONALITY.HARMONIC_MINOR:
+            case TONALITY.MELODIC_MINOR:
                 this.keySig += 'm'
-
-
-                    ;
-            // case TONALITY.MAJOR:
-            //     notes = copyNotes(MAJOR[key])
-            //     break;
-            // default:
-
+                break;
         }
-
 
     }
 
