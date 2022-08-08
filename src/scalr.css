@@ -72,9 +72,9 @@ h1 {
     }
 }
 
-/*
 
-@-webkit-keyframes {}
+
+/* @-webkit-keyframes {}
 
 @-webkit-keyframes extend {
     0% {
@@ -279,4 +279,4 @@ button:focus>img {
     animation-fill-mode: forwards
 }
 
-*/ */
+*/
