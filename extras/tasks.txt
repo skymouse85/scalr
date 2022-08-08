@@ -1,13 +1,14 @@
+Add common methods to base 
+
 make the domList a table that reads out all values (step, offset, octave, key signature (in a different div))
  (figure out how to do this dynamically in jquery)
+
+update MXML out put to include key signatures
 
 add Ascending_Descending as octave option
 
 generate beams in vexflow
 
-Add common methods to base 
-
-update MXML out put to include key signatures
 
 think about how to diminished and other tonalities
 
