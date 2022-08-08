@@ -1,9 +1,17 @@
 import Base from './base.js'
+import { TONALITY } from '../model.js'
+
+const OffsetSymbol = {
+    '0': '',
+    '1': '#',
+    '-1': 'b'
+}
 
 export default class ListWriter extends Base {
 
     render(target) {
         this.target = target;
+        this.setupKeySig()
         var $ul = $(target)
         $ul.empty();
 
@@ -35,7 +43,30 @@ export default class ListWriter extends Base {
             $li.appendTo($ul)
 
         }
+        $li.text(this.keySig)
+        $li.appendTo($ul)
 
     }
+    setupKeySig() {
+        this.keySig = `key of ${this.scale.root.letter + getAccidental(this.scale.root)}`;
+        //TODO refactor the switch to take this.keysig 
+
+        var tonality = this.scale.tonality
+        switch (tonality) {
+            case TONALITY.NATURAL_MINOR:
+                this.keySig += ' natural minor'
+                break;
+            case TONALITY.HARMONIC_MINOR:
+                this.keySig += ' harmonic minor'
+                break;
+            case TONALITY.MELODIC_MINOR:
+                this.keySig += ' melodic minor'
+                break;
+        }
+
+    }
+}
+function getAccidental(note) {
+    return OffsetSymbol[note.offset]
 }
 export { ListWriter }
