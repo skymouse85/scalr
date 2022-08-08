@@ -9,6 +9,10 @@ h1 {
 
 }
 
+#generate {
+    background-color: aqua;
+}
+
 
 
 
@@ -47,6 +51,7 @@ h1 {
     animation: 3s linear 0s infinite alternate move_eye;
 }
 
+
 @-webkit-keyframes move_eye {
     from {
         margin-left: -20%;
@@ -67,6 +72,7 @@ h1 {
     }
 }
 
+/*
 
 @-webkit-keyframes {}
 
@@ -218,10 +224,10 @@ button {
     width: 50;
     height: 50px;
     /*border-radius*/
-    border-radius: 100px;
-    background: #e4d7d9;
-    position: sticky;
-    border: 5px solid #F38993
+/* border-radius: 100px;
+background: #e4d7d9;
+position: sticky;
+border: 5px solid #F38993
 }
 
 button>span {
@@ -245,12 +251,12 @@ img {
 
 button:focus {
     /*animation*/
-    -webkit-animation: extend 1s ease-in-out;
-    -ms-animation: extend 1s ease-in-out;
-    animation: extend 1s ease-in-out;
-    -webkit-animation-fill-mode: forwards;
-    /* Chrome, Safari, Opera */
-    animation-fill-mode: forwards
+-webkit-animation: extend 1s ease-in-out;
+-ms-animation: extend 1s ease-in-out;
+animation: extend 1s ease-in-out;
+-webkit-animation-fill-mode: forwards;
+/* Chrome, Safari, Opera */
+animation-fill-mode: forwards
 }
 
 button:focus>span {
@@ -272,3 +278,5 @@ button:focus>img {
     /* Chrome, Safari, Opera */
     animation-fill-mode: forwards
 }
+
+*/ */
