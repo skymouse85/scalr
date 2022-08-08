@@ -46,12 +46,12 @@ export default class MxmlWriter extends Base {
 
 
   setupNote() {
-    var notesXml = ``
-    var notes = this.scale.notes
-    for (let i = 0; i < notes.length; i++) {
+    this.notesXml = ``
+    this.notes = this.scale.notes
+    for (let i = 0; i < this.notes.length; i++) {
 
-      let note = notes[i]
-      notesXml += `
+      let note = this.notes[i]
+      this.notesXml += `
               <note>
                 <pitch>
                   <alter>${note.offset}</alter>
@@ -82,7 +82,7 @@ export default class MxmlWriter extends Base {
   }
 
   setupOutput() {
-    var notes = this.scale.notes
+    // var notes = this.scale.notes
     var output = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <!DOCTYPE score-partwise PUBLIC
         "-//Recordare//DTD MusicXML 4.0 Partwise//EN"
@@ -101,7 +101,7 @@ export default class MxmlWriter extends Base {
               <fifths>${this.key}</fifths>
             </key>
             <time>
-              <beats>${notes.length}</beats>
+              <beats>${this.notes.length}</beats>
               <beat-type>4</beat-type>
             </time>
             <clef>
@@ -114,7 +114,7 @@ export default class MxmlWriter extends Base {
       </part>
     </score-partwise>`
 
-    $(target).text(output)
+    $(this.target).text(output)
   }
 
 
