@@ -1,16 +1,17 @@
 h1 {
-    color: #F38993;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    text-shadow: 1px 1px 2px rgb(144, 188, 242);
-    font-weight: 600;
-    font-size: xx-large;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 70px;
 
+    font-weight: 600;
 
 }
 
 #generate {
-    background-color: aqua;
+    background-color: #72DDF7;
+}
+
+.jumbotron {
+    bg-info;
 }
 
 
@@ -22,7 +23,7 @@ h1 {
 
 }
 
-
+/* 
 .polling_message {
     color: rgb(245, 202, 253);
     float: left;
@@ -70,8 +71,7 @@ h1 {
     to {
         margin-left: 100%;
     }
-}
-
+} */
 
 
 /* @-webkit-keyframes {}
@@ -218,65 +218,3 @@ submit {
     top: 50%;
     margin: -100px 0 0 -300px
 }
-
-button {
-    border-width: 1px;
-    width: 50;
-    height: 50px;
-    /*border-radius*/
-/* border-radius: 100px;
-background: #e4d7d9;
-position: sticky;
-border: 5px solid #F38993
-}
-
-button>span {
-    font-size: 28px;
-    color: #F38993
-}
-
-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    opacity: 0;
-    width: fit-content;
-    height: fit-content;
-}
-
-button:focus {
-    /*animation*/
--webkit-animation: extend 1s ease-in-out;
--ms-animation: extend 1s ease-in-out;
-animation: extend 1s ease-in-out;
--webkit-animation-fill-mode: forwards;
-/* Chrome, Safari, Opera */
-animation-fill-mode: forwards
-}
-
-button:focus>span {
-    /*animation*/
-    -webkit-animation: disappear 1s ease-in-out;
-    -ms-animation: disappear 1s ease-in-out;
-    animation: disappear 1s ease-in-out;
-    -webkit-animation-fill-mode: forwards;
-    /* Chrome, Safari, Opera */
-    animation-fill-mode: forwards
-}
-
-button:focus>img {
-    /*animation*/
-    -webkit-animation: appear 1s ease-in-out;
-    -ms-animation: appear 1s ease-in-out;
-    animation: appear 1s ease-in-out;
-    -webkit-animation-fill-mode: forwards;
-    /* Chrome, Safari, Opera */
-    animation-fill-mode: forwards
-}
-
-*/

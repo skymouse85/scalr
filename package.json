@@ -1,0 +1,32 @@
+{
+  "name": "scalr",
+  "version": "1.0.0",
+  "description": "a website that takes a chord symbol and returns a list of viable scales that can be used to improvise over the given chord.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run lite",
+    "lite": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skymouse85/scalr.git"
+  },
+  "author": "Mark Clifford",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skymouse85/scalr/issues"
+  },
+  "homepage": "https://github.com/skymouse85/scalr#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  }
+}
