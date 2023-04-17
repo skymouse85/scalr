@@ -24,21 +24,21 @@
 
     <header class="jumbotron jumbotron-fluid">
         <div class="container">
-            <div class="row">
-                <div class="col mx-auto">
+            <div class="row mx-3">
+                <div class="col">
                     <h1>Scalr</h1>
                 </div>
             </div>
         </div>
     </header>
 
-    <div id="input">
+    <div id="input" class="input">
         <h2>Input</h2>
 
         <!--add labels to note, offset,  and tonality inputs-->
-        <form id="inpform">
+        <form id="inpform" class="input">
             <!--note input-->
-            <select id="note">
+            <select id="note" class="form-item">
                 <!-- <option value="">-Tonic-</option> -->
                 <option value="0">C</option>
                 <option value="1">D</option>
@@ -49,13 +49,13 @@
                 <option value="6">B</option>
             </select>
             <!--offset input-->
-            <select id="offset">
+            <select id="offset" class="form-item">
                 <option value="1">♯</option>
                 <option value="0" selected>♮</option>
                 <option value="-1">♭</option>
             </select>
             <!--tonality inputs-->
-            <select id="tonality">
+            <select id="tonality" class="form-item">
                 <!-- <option value="">-Tonality-</option> -->
                 <option value="1">major</option>
                 <option value="2">natural minor</option>
@@ -65,19 +65,19 @@
                 <!-- <option>augmented</option> -->
                 <!--make minor sub form -->
             </select>
-            <select id="direction">
+            <select id="direction" class="form-item">
                 <!-- <option value="">-Scale Direction-</option> -->
                 <option value="1">ascend</option>
                 <option value="2">descend</option>
                 <option value="3">ascend_descend</option>
             </select>
-            <select id="clef">
+            <select id="clef" class="form-item">
                 <!-- <option value="">-Clef-</option> -->
                 <option value="G">Treble</option>
                 <option value="F">Bass</option>
             </select>
 
-            <select id="octave">
+            <select id="octave" class="form-item">
                 <!-- <option value="">-Octave-</option> -->
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -86,21 +86,14 @@
                 <option value="6">6</option>
             </select>
             <input id="generate" type="submit">
-
-            <!-- <div class="cont">
-                <button class="btn"><span>Submit</span><img src="https://i.cloudup.com/2ZAX3hVsBE-3000x3000.png"
-                        height="12" width="32"></button>
-
-
-            </div> -->
         </form>
 
     </div>
-    <div id="output">
+    <div id="output" class="input">
 
         <ul id="list_output"></ul>
         <h2>vexFlow</h2>
-        <h3>native api</h3>
+        <h2>native api</h2>
         <div id="vexFlow_Output"></div>
         <!-- <h3>easyScore output</h3>
         <div id="easyVex_output"></div> -->
