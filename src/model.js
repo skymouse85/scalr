@@ -1,4 +1,10 @@
 
+export const TONALITY = {
+    MAJOR: 1,
+    NATURAL_MINOR: 2,
+    HARMONIC_MINOR: 3,
+    MELODIC_MINOR: 4,
+}
 // ♮♯♭
 
 //! offset to offset, natural = 0, sharp = 1, flat = -1
@@ -22,12 +28,6 @@ const ACCIDENTS = {
     '1': 'sharp'
 }
 
-export const TONALITY = {
-    MAJOR: 1,
-    NATURAL_MINOR: 2,
-    HARMONIC_MINOR: 3,
-    MELODIC_MINOR: 4,
-}
 
 const DIRECTION = {
     ASCEND: 1,
