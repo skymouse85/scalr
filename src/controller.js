@@ -1,6 +1,6 @@
 // import { StaveNote, Voice } from "vexflow";
 import * as Scalr from "./model.js"
-import * as Writers from "./writers.js"
+import * as Writers from "../writers.js"
 // coordinate between view and model
 $(document).ready(onReady)
 
